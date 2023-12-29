@@ -1,0 +1,1 @@
+api: https://github.com/rinku-1998/chef-gpt-api

@@ -1,0 +1,25 @@
+.flex-row {
+  display: flex;
+  flex: 1;
+}
+
+.left {
+  width: 300px;
+}
+
+.chat-room {
+  flex-grow: 1;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-area {
+  display: flex;
+  width: calc(100vw - 350px);
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}

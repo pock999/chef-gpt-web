@@ -3,6 +3,7 @@ import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import {RoutesGuard} from './shared'
+import { ChatRoom } from './pages'
 
 function Login() {
   return <>Login</>
@@ -20,8 +21,9 @@ function App () {
       <Route element={<RoutesGuard />}>
         <Route path="/other" element={<Other />} />
       </Route>
-
+      <Route path="/chat" element={<ChatRoom />} />
       <Route path="/login" element={<Login />} />
+      
     </Routes>
   )
 }

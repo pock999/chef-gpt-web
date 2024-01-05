@@ -8,13 +8,19 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-free": "^6.5.1",
+    "@mui/icons-material": "^5.15.3",
+    "@mui/material": "^5.15.3",
     "@vitejs/plugin-react": "^4.2.1",
+    "add": "^2.0.6",
+    "bootstrap-css-only": "^4.4.1",
     "react": "^17.0.0",
-    "react-chat-elements": "^12.0.11",
-    "react-device-detect": "^2.2.3",
     "react-dom": "^17.0.0",
     "react-router-dom": "^6.21.1",
-    "vite-tsconfig-paths": "^4.2.3"
+    "vite-tsconfig-paths": "^4.2.3",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",

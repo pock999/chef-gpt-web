@@ -1,145 +1,180 @@
 import React, { useState } from 'react';
-import "react-chat-elements/dist/main.css";
-import { ChatList, MessageList, Navbar, Input, Button } from "react-chat-elements";
-import {isMobile} from 'react-device-detect';
-import './style.css';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { ChatListSection, MessageList } from '../../components';
+import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import SendIcon from '@mui/icons-material/Send';
+import AddIcon from '@mui/icons-material/Add';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export function  ChatRoom() {
 
-  const [mobileChatDrawer, setMobileChatDrawer] = useState(false);
-
-  const handleMobileChatList = () => {
-    setMobileChatDrawer(!mobileChatDrawer);
-  }
-
-  if(!isMobile) {
-    return (
-      <>
-        <Navbar
-          left={(<div>Chef-GPT</div>)}
-          type="light"
-        />
-        <div className="flex-row">
-          <div className="left">
-            <ChatList
-              className='chat-list'
-              lazyLoadingImage=''
-              id='chat-list'
-              dataSource={[
-                {
-                  id: 1,
-                  avatar: 'https://avatars.githubusercontent.com/u/80540635?v=4',
-                  alt: 'kursat_avatar',
-                  title: 'Kursat',
-                  subtitle: "Why don't we go to the No Way Home movie this weekend ?",
-                  date: new Date(),
-                  unread: 3,
-                },
-                {
-                  id: 1,
-                  avatar: 'https://avatars.githubusercontent.com/u/80540635?v=4',
-                  alt: 'kursat_avatar',
-                  title: 'Kursat',
-                  subtitle: "Why don't we go to the No Way Home movie this weekend ?",
-                  date: new Date(),
-                  unread: 3,
-                }
-            ]} />
-          </div>
-          <div className="chat-room">
-            <div className="flex-row">
-              <MessageList
-                className='message-list'
-                lockable={true}
-                toBottomHeight={'100%'}
-                referance={null}
-                dataSource={[
-                  {
-                    id: 1,
-                    position:"left",
-                    type:"text",
-                    title:"Kursat",
-                    text:"Give me a message list example !",
-                    focus: false,
-                    date: new Date(),
-                    titleColor: 'black',
-                    forwarded: false,
-                    replyButton: false,
-                    removeButton: false,
-                    status: 'sent',
-                    notch: false,
-                    retracted: false,
-                  },
-                  {
-                    id: 2,
-                    position:"right",
-                    type:"text",
-                    title:"Emre",
-                    text:"That's all.",
-                    focus: false,
-                    date: new Date(),
-                    titleColor: 'black',
-                    forwarded: false,
-                    replyButton: false,
-                    removeButton: false,
-                    status: 'sent',
-                    notch: false,
-                    retracted: false,
-                  },
-                ]}
-              />
-            </div>
-            <div className="flex-row">
-              <div className="input-area">
-                <Input
-                  placeholder="Type here..."
-                  multiline={true}
-                  maxHeight={100}
-                />
-                <Button text={"Send"} onClick={() => alert("Sending...")} title="Send" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
+  const theme = useTheme();
+  const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <>
-      {
-        mobileChatDrawer && <ChatList
-        className='chat-list'
-        lazyLoadingImage=''
-        id='chat-list'
-        dataSource={[
-          {
-            id: 1,
-            avatar: 'https://avatars.githubusercontent.com/u/80540635?v=4',
-            alt: 'kursat_avatar',
-            title: 'Kursat',
-            subtitle: "Why don't we go to the No Way Home movie this weekend ?",
-            date: new Date(),
-            unread: 3,
-          },
-          {
-            id: 1,
-            avatar: 'https://avatars.githubusercontent.com/u/80540635?v=4',
-            alt: 'kursat_avatar',
-            title: 'Kursat',
-            subtitle: "Why don't we go to the No Way Home movie this weekend ?",
-            date: new Date(),
-            unread: 3,
-          }
-      ]} />
-      }
-      
-      <Navbar
-        center={(<div>Chef-GPT</div>)}
-        right={<div onClick={() => handleMobileChatList()}>漢堡</div>}
-        type="light"
-      />
+      <Grid container spacing={1} sx={{ height: '100%' }}>
+        {
+          matchmdUp &&
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={3}
+            xl={2}
+            sx={{
+              display: 'flex',
+              alignContent: 'center',
+            }}
+          >
+            <ChatListSection
+              chatList={[
+                {
+                  avatarImg: '/static/images/avatar/2.jpg',
+                  title: '標題1',
+                  dateTime: '2023-01-01 12:00:00'
+                },
+                {
+                  avatarImg: '/static/images/avatar/3.jpg',
+                  title: '標題2',
+                  dateTime: '2023-01-01 11:00:00'
+                },
+                {
+                  avatarImg: '/static/images/avatar/3.jpg',
+                  title: '標題2',
+                  dateTime: '2023-01-01 11:00:00'
+                },
+                {
+                  avatarImg: '/static/images/avatar/3.jpg',
+                  title: '標題2',
+                  dateTime: '2023-01-01 11:00:00'
+                },
+                {
+                  avatarImg: '/static/images/avatar/3.jpg',
+                  title: '標題2',
+                  dateTime: '2023-01-01 11:00:00'
+                },
+                {
+                  avatarImg: '/static/images/avatar/3.jpg',
+                  title: '標題2',
+                  dateTime: '2023-01-01 11:00:00'
+                },
+                {
+                  avatarImg: '/static/images/avatar/3.jpg',
+                  title: '標題2',
+                  dateTime: '2023-01-01 11:00:00'
+                },
+                {
+                  avatarImg: '/static/images/avatar/3.jpg',
+                  title: '標題2',
+                  dateTime: '2023-01-01 11:00:00'
+                },
+                {
+                  avatarImg: '/static/images/avatar/3.jpg',
+                  title: '標題2',
+                  dateTime: '2023-01-01 11:00:00'
+                },
+              ]}
+            />
+            {
+              !matchmdUp &&
+              <Button aria-label="delete" size="large" style={{
+                position: 'fixed',
+                bottom: '1rem',
+                right: '1rem',
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
+              }}
+              variant="contained"
+              >
+                <AddIcon fontSize="inherit" />
+              </Button>
+            }
+            
+            {
+              matchmdUp &&
+              <Divider sx={{ marginLeft: '1rem' }} orientation="vertical" variant="middle" flexItem />
+            }
+          </Grid>
+        }
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={9}
+          xl={10}
+          sx={{
+            display: 'flex',
+            alignContent: 'center'
+          }}
+        >
+          <Grid container spacing={1} sx={{ height: '100%', display: 'flex' }}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                height: 'calc(100% - 120px)',
+                width: '100%',
+              }}
+            >
+              {
+                !matchmdUp &&
+                <Button variant="text" sx={{
+                  position: 'fixed',
+                  top: '0.5rem',
+                  right: '0.5rem',
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '50%',
+                }}>
+                  <ArrowBackIcon/>
+                </Button>
+              }
+              
+              <MessageList
+                messageList={[
+                  {
+                    message: 'test',
+                    direction: 'receive',
+                  },
+                  {
+                    message: 'test2',
+                    direction: 'send',
+                  },
+                ]}
+              />
+
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                height: '80px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                flexDirection: 'row',
+                borderTop: '1px solid #E0E0E0'
+              }}
+            >
+              <TextField id="outlined-basic" variant="outlined" multiline maxRows={3} label="" sx={{
+                width: 'calc(99% - 88px)',
+                height: '100%'
+              }} />
+              <Button variant="contained" sx={{ width: '80px', marginLeft: '0.5rem', paddingTop: '1rem', paddingBottom: '1rem' }}>
+                <SendIcon></SendIcon>
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   );
-	
 }

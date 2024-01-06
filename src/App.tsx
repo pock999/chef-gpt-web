@@ -3,7 +3,7 @@ import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import {RoutesGuard} from './shared'
-import { ChatRoom, ChatList, Login, Register } from './pages'
+import { ChatRoom, ChatList, Login, Register, NotFound } from './pages'
 import { Navbar } from './components'
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,9 +14,6 @@ function Other() {
   return <>Other</>
 }
 
-function NotFound() {
-  return <>NotFound</>
-}
 
 function App () {
   // const [count, setCount] = useState(0)

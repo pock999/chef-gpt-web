@@ -3,20 +3,19 @@ import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import {RoutesGuard} from './shared'
-import { ChatRoom } from './pages'
-import { ChatList } from './pages/ChatList'
+import { ChatRoom, ChatList, Login, Register } from './pages'
 import { Navbar } from './components'
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
+import { AppLayout, AuthLayout } from './layouts'
 
-
-
-function Login() {
-  return <>Login</>
-}
 
 function Other() {
   return <>Other</>
+}
+
+function NotFound() {
+  return <>NotFound</>
 }
 
 function App () {
@@ -24,15 +23,22 @@ function App () {
 
   return (
     <>
-      <Navbar title={'Chef-GPT'}/>
       <Container maxWidth={false} style={{ padding: 0, paddingTop: '1rem', height: 'calc(100% - 87px)' }}>
         <Routes>
-          <Route element={<RoutesGuard />}>
-            <Route path="/other" element={<Other />} />
+          <Route path="auth" element={<AuthLayout />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
           </Route>
-          <Route path="/chat" element={<ChatList />} />
-          <Route path="/chat/:id" element={<ChatRoom />} />
-          <Route path="/login" element={<Login />} />
+
+          <Route path="app" element={<AppLayout />}>
+            <Route element={<RoutesGuard />}>
+              <Route path="other" element={<Other />} />
+            </Route>
+            <Route path="chat" element={<ChatList />} />
+            <Route path="chat/:id" element={<ChatRoom />} />
+          </Route>
+
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Container>
     </>

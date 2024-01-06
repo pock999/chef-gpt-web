@@ -37,7 +37,7 @@ export function NotFound() {
               {/* <Typography variant="h6">
                 沒有此頁面！！！
               </Typography> */}
-              <Button variant="contained">OK</Button>
+              <Button variant="contained" >OK</Button>
             </Grid>
             
           </Grid>

@@ -20,7 +20,7 @@ export function NotFound() {
       >
         <Container maxWidth="md">
           <Grid container spacing={2}>
-            <Grid xs={12} md={8}>
+            <Grid xs={12} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
               <img
                 src="https://cdni.iconscout.com/illustration/free/thumb/free-error-2103590-1768082.png"
                 alt=""
@@ -30,14 +30,14 @@ export function NotFound() {
                 }}
               />
             </Grid>
-            <Grid xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-              <Typography variant="h1">
+            <Grid xs={12} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+              {/* <Typography variant="h1">
                 404
-              </Typography>
-              <Typography variant="h6">
+              </Typography> */}
+              {/* <Typography variant="h6">
                 沒有此頁面！！！
-              </Typography>
-              <Button variant="contained">Back Home</Button>
+              </Typography> */}
+              <Button variant="contained">OK</Button>
             </Grid>
             
           </Grid>

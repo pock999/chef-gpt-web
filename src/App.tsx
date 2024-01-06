@@ -20,24 +20,22 @@ function App () {
 
   return (
     <>
-      <Container maxWidth={false} style={{ padding: 0, paddingTop: '1rem', height: 'calc(100% - 87px)' }}>
-        <Routes>
-          <Route path="auth" element={<AuthLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route>
+      <Routes>
+        <Route path="auth" element={<AuthLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
 
-          <Route path="app" element={<AppLayout />}>
-            <Route element={<RoutesGuard />}>
-              <Route path="other" element={<Other />} />
-            </Route>
-            <Route path="chat" element={<ChatList />} />
-            <Route path="chat/:id" element={<ChatRoom />} />
+        <Route path="app" element={<AppLayout />}>
+          <Route element={<RoutesGuard />}>
+            <Route path="other" element={<Other />} />
           </Route>
+          <Route path="chat" element={<ChatList />} />
+          <Route path="chat/:id" element={<ChatRoom />} />
+        </Route>
 
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </Container>
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </>
   )
 }

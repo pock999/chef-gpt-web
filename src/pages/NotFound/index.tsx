@@ -9,38 +9,40 @@ export function NotFound() {
   const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh'
-      }}
-    >
-      <Container maxWidth="md">
-        <Grid container spacing={2}>
-          <Grid xs={12} md={8}>
-            <img
-              src="https://cdni.iconscout.com/illustration/free/thumb/free-error-2103590-1768082.png"
-              alt=""
-              style={{
-                maxWidth: matchmdUp ? '500' : '100%',
-                maxHeight: matchmdUp ? '700' : 'auto',
-              }}
-            />
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh'
+        }}
+      >
+        <Container maxWidth="md">
+          <Grid container spacing={2}>
+            <Grid xs={12} md={8}>
+              <img
+                src="https://cdni.iconscout.com/illustration/free/thumb/free-error-2103590-1768082.png"
+                alt=""
+                style={{
+                  maxWidth: matchmdUp ? '500' : '100%',
+                  maxHeight: matchmdUp ? '700' : 'auto',
+                }}
+              />
+            </Grid>
+            <Grid xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+              <Typography variant="h1">
+                404
+              </Typography>
+              <Typography variant="h6">
+                沒有此頁面！！！
+              </Typography>
+              <Button variant="contained">Back Home</Button>
+            </Grid>
+            
           </Grid>
-          <Grid xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-            <Typography variant="h1">
-              404
-            </Typography>
-            <Typography variant="h6">
-              沒有此頁面！！！
-            </Typography>
-            <Button variant="contained">Back Home</Button>
-          </Grid>
-          
-        </Grid>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+    </>
   );
 }

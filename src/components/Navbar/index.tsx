@@ -5,7 +5,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import logo from '../../logo.svg';
+// import logo from '../../logo.svg';
 
 export function Navbar({title}: NavbarProps) {
   return (
@@ -22,7 +22,7 @@ export function Navbar({title}: NavbarProps) {
                 alignContent: 'center'
               }}
             >
-              <img src={logo} className="App-logo" alt="logo" style={{ width: '80px', height: 'auto' }} />
+              <img src="https://influencermarketinghub.com/wp-content/uploads/2023/02/chatgpt-logo-02AFA704B5-seeklogo.com_.png" className="App-logo" alt="logo" style={{ width: '80px', height: 'auto' }} />
             </Grid> 
             <Grid item xs={10} sm={11} sx={{
               display: 'flex',

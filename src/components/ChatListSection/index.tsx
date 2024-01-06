@@ -9,6 +9,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { ChatListProps } from './chat-list-props.model';
 import CloseIcon from '@mui/icons-material/Close';
+import dayjs from 'dayjs';
 
 export function ChatListSection({ chatList }: ChatListProps) {
 
@@ -32,7 +33,7 @@ export function ChatListSection({ chatList }: ChatListProps) {
                         variant="body2"
                         color="text.primary"
                       >
-                        { chatItem.dateTime }
+                        { dayjs(chatItem.dateTime).format('YYYY-MM-DD HH:mm:ss') }
                       </Typography>
                     </React.Fragment>
                   }

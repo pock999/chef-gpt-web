@@ -15,19 +15,23 @@
     "@mui/material": "^5.15.3",
     "@vitejs/plugin-react": "^4.2.1",
     "add": "^2.0.6",
+    "axios": "^1.6.5",
     "bootstrap-css-only": "^4.4.1",
+    "dayjs": "^1.11.10",
     "lodash": "^4.17.21",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "path": "^0.12.7",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-router-dom": "^6.21.1",
+    "vite-plugin-static-copy": "0.17.1",
     "vite-tsconfig-paths": "^4.2.3",
     "yarn": "^1.22.21",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.202",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^43.0.0",
@@ -37,6 +41,7 @@
     "eslint-plugin-react": "^7.33.2",
     "typescript": "*",
     "vite": "5",
-    "vite-plugin-react": "^4.0.0"
+    "vite-plugin-react": "^4.0.0",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }

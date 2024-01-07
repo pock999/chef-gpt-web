@@ -18,6 +18,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { AuthLoginReqVO } from '../../api';
 import { AuthService } from '../../services';
 import { Link } from "react-router-dom";
+import {
+  Snackbar,
+  RegexUtil,
+} from '../../shared';
 
 
 export function Login() {
@@ -26,9 +30,46 @@ export function Login() {
 
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
+  const [ formValid, setFormValid ] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: '',
+    password: '',
+  });
+
+  const handleValidation = (e: any, target: 'email' | 'password') => {
+    const { value } = e.target;
+    const passwordReg = RegexUtil.passwordReg;
+    const emailReg = RegexUtil.emailReg;
+
+    let errorText = '';
+    
+    if(target === 'email') {
+      if(!emailReg.test(value)) {
+        errorText = 'Email 格式錯誤';
+      }
+    } else {
+      if(!passwordReg.test(value)) {
+        errorText = '密碼格式錯誤';
+      }
+    }
+
+    setFormValid({
+      ...formValid,
+      [target]: errorText,
+    });
+  };
+
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
-    setSubmitLoading(true);
     evt.preventDefault();
+    if(!!formValid.email || !!formValid.password) {
+      Snackbar.error('帳號密碼格式錯誤');
+      return;
+    }
+    setSubmitLoading(true);
+    
+    
     try {
       const data = new AuthLoginReqVO();
       data.email = (evt.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
@@ -81,6 +122,9 @@ export function Login() {
               name="email"
               autoComplete="email"
               size="small"
+              onChange={(e) => handleValidation(e, 'email')}
+              error={formValid.email !== ""}
+              helperText={formValid.email !== "" ? formValid.email : ''}
             />
             <TextField
               margin="normal"
@@ -92,6 +136,9 @@ export function Login() {
               id="password"
               size="small"
               autoComplete="current-password"
+              onChange={(e) => handleValidation(e, 'password')}
+              error={formValid.password !== ""}
+              helperText={formValid.password !== "" ? formValid.password : ''}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

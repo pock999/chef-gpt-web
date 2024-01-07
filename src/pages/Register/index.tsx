@@ -19,15 +19,64 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { AuthRegisterReqVO } from '../../api';
 import { AuthService } from '../../services';
 
+import {
+  Snackbar,
+  RegexUtil
+} from '../../shared';
+
 export function Register() {
 
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+  const [ formValid, setFormValid ] = useState<{
+    name: string;
+    email: string;
+    password: string;
+  }>({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleValidation = (e: any, target: 'name' | 'email' | 'password') => {
+    const { value } = e.target;
+    const passwordReg = RegexUtil.passwordReg;
+    const emailReg = RegexUtil.emailReg;
+
+    let errorText = '';
+    
+    if(target === 'name') {
+      if(value.length === 0) {
+        errorText = '姓名不得為空';
+      } else if(value.trim() !== value) {
+        errorText = '姓名不得以空白開頭與結尾';
+      } else if(value.length > 128) {
+        errorText = '姓名長度最多為 128 字元';
+      }
+    } else if(target === 'email') {
+      if(!emailReg.test(value)) {
+        errorText = 'Email 格式錯誤';
+      }
+    } else {
+      if(!passwordReg.test(value)) {
+        errorText = '密碼強度不足';
+      }
+    }
+
+    setFormValid({
+      ...formValid,
+      [target]: errorText,
+    });
+  };
 
   const navigate = useNavigate();
 
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
-    setSubmitLoading(true);
     evt.preventDefault();
+    if(!!formValid.email || !!formValid.password || !!formValid.name) {
+      Snackbar.error('表單欄位格式錯誤');
+      return;
+    }
+    setSubmitLoading(true);
     try {
       const data = new AuthRegisterReqVO();
       data.email = (evt.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
@@ -83,6 +132,9 @@ export function Register() {
               autoComplete="name"
               size="small"
               autoFocus
+              onChange={(e) => handleValidation(e, 'name')}
+              error={formValid.name !== ""}
+              helperText={formValid.name !== "" ? formValid.name : ''}
             />
             <TextField
               margin="normal"
@@ -94,6 +146,9 @@ export function Register() {
               autoComplete="email"
               size="small"
               autoFocus
+              onChange={(e) => handleValidation(e, 'email')}
+              error={formValid.email !== ""}
+              helperText={formValid.email !== "" ? formValid.email : ''}
             />
             <TextField
               margin="normal"
@@ -105,6 +160,9 @@ export function Register() {
               id="password"
               size="small"
               autoComplete="current-password"
+              onChange={(e) => handleValidation(e, 'password')}
+              error={formValid.password !== ""}
+              helperText={formValid.password !== "" ? formValid.password : ''}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

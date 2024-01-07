@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -21,16 +21,21 @@ import { AuthService } from '../../services';
 
 export function Register() {
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    
-    const data = new AuthRegisterReqVO();
-    data.email = (evt.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
-    data.name = (evt.currentTarget.elements.namedItem('name') as HTMLInputElement).value;
-    data.password = (evt.currentTarget.elements.namedItem('password') as HTMLInputElement).value;
+    try {
+      const data = new AuthRegisterReqVO();
+      data.email = (evt.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
+      data.name = (evt.currentTarget.elements.namedItem('name') as HTMLInputElement).value;
+      data.password = (evt.currentTarget.elements.namedItem('password') as HTMLInputElement).value;
 
-    console.log('data ==> ', data);
-    await AuthService.register(data);
+      await AuthService.register(data);
+      navigate('/auth/login');
+    } catch (e) {
+
+    }
   };
 
   return (

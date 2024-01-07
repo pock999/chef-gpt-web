@@ -8,8 +8,20 @@ import {
 
 export const AuthService = {
   async register(payload: AuthRegisterReqVO) {
-    console.log('register payload => ', payload);
-    Snackbar.success('ok');
+    try {
+      const result = await AuthAPI.register(payload);
+      Snackbar.success('註冊成功');
+    } catch (err) {
+      console.error('err => ', err);
+      if(_.get(err, 'response')) {
+        const res = _.get(err, 'response');
+        Snackbar.error(res.data.msg);
+      } else {
+        Snackbar.error('例外');
+      }
+
+      throw err;
+    }
   },
 
   async login(payload: AuthLoginReqVO) {

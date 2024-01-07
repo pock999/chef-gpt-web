@@ -4,8 +4,13 @@ import { IResponseDTO } from './dto';
 import { CONFIG } from '../config';
 
 export const AuthAPI = {
-  async register(payload: AuthRegisterReqVO): Promise<AuthRegisterResVO> {
-    return await http.post('/registrations', payload);
+  async register(payload: AuthRegisterReqVO): Promise<IResponseDTO<AuthRegisterResVO>> {
+    const res = await http.post('/registrations', payload);
+    
+    return {
+      ...res.data,
+      status: res.status,
+    };
   },
 
   async login(payload: AuthLoginReqVO): Promise<IResponseDTO<AuthLoginResVO>> {

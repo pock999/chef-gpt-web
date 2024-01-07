@@ -28,7 +28,8 @@ yarn
 
 ```ts
 export const CONFIG = {
-  tokenKey: '_token', // localStorage token 存放之 key
+  tokenKey: '_token', // localStorage token 存放之 key，可以不改
+  authKey: '_auth', // localStorage 登入資料 存放之 key，可以不改
   apiUrl: 'http://localhost:8000', // API URL
 };
 ```

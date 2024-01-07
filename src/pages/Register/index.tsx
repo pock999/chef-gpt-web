@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -21,9 +21,12 @@ import { AuthService } from '../../services';
 
 export function Register() {
 
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
+    setSubmitLoading(true);
     evt.preventDefault();
     try {
       const data = new AuthRegisterReqVO();
@@ -36,6 +39,7 @@ export function Register() {
     } catch (e) {
 
     }
+    setSubmitLoading(false);
   };
 
   return (
@@ -121,6 +125,7 @@ export function Register() {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
+                    disabled={submitLoading}
                   >
                     註冊
                 </Button>

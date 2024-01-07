@@ -24,7 +24,10 @@ export function Login() {
 
   const navigate = useNavigate();
 
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
+    setSubmitLoading(true);
     evt.preventDefault();
     try {
       const data = new AuthLoginReqVO();
@@ -35,6 +38,7 @@ export function Login() {
       navigate('/app/chat');
     } catch(e) {
     }
+    setSubmitLoading(false);
   };
 
   return (
@@ -108,6 +112,7 @@ export function Login() {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
+                    disabled={submitLoading}
                   >
                     登入
                 </Button>

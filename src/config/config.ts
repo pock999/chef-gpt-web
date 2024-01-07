@@ -1,4 +1,5 @@
 export const CONFIG = {
   tokenKey: '_token',
-  apiUrl: 'http://localhost:8000',
+  authKey: '_auth',
+  apiUrl: 'http://127.0.0.1:8000/api/v1',
 };

@@ -1,4 +1,4 @@
-export class AuthLoginReqDTO {
+export class AuthLoginReqVO {
   email: string;
   password: string;
 }

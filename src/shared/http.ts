@@ -5,7 +5,7 @@ const http = axios.create({
   baseURL: CONFIG.apiUrl,
 });
 
-const setupInterceptors = history => {
+const setupInterceptors = navigate => {
   http.interceptors.response.use(res => {
     // success
     return res
@@ -13,9 +13,9 @@ const setupInterceptors = history => {
     const { status } = err.response
   
     if (status === 401) {
-      // here we have access of the useHistory() from current Router
+      // here we have access of the useNavigate() from current Router
       localStorage.clear();
-      history.push('/auth/login')
+      navigate('/auth/login')
     }
   
     return Promise.reject(err)

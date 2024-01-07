@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -7,7 +7,7 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
+  Link as MuiLink,
   Grid,
   Box,
   Typography,
@@ -16,11 +16,21 @@ import {
 } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+import { AuthRegisterReqVO } from '../../api';
+import { AuthService } from '../../services';
+
 export function Register() {
 
-  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const data = new FormData(evt.currentTarget);
+    
+    const data = new AuthRegisterReqVO();
+    data.email = (evt.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
+    data.name = (evt.currentTarget.elements.namedItem('name') as HTMLInputElement).value;
+    data.password = (evt.currentTarget.elements.namedItem('password') as HTMLInputElement).value;
+
+    console.log('data ==> ', data);
+    await AuthService.register(data);
   };
 
   return (
@@ -94,8 +104,10 @@ export function Register() {
             
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  前往登入
+                <Link to="/auth/login">
+                  <MuiLink variant="body2">
+                    前往登入
+                  </MuiLink>
                 </Link>
               </Grid>
               <Grid item sx={{ mt: 4 }}>

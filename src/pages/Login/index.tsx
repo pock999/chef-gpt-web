@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -7,7 +7,7 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
+  Link as MuiLink,
   Grid,
   Box,
   Typography,
@@ -15,13 +15,26 @@ import {
   Paper,
 } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { AuthLoginReqVO } from '../../api';
+import { AuthService } from '../../services';
+import { Link } from "react-router-dom";
 
 
 export function Login() {
 
-  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const data = new FormData(evt.currentTarget);
+    try {
+      const data = new AuthLoginReqVO();
+      data.email = (evt.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
+      data.password = (evt.currentTarget.elements.namedItem('password') as HTMLInputElement).value;
+  
+      await AuthService.login(data);
+      navigate('/app/chat');
+    } catch(e) {
+    }
   };
 
   return (
@@ -64,7 +77,6 @@ export function Login() {
               name="email"
               autoComplete="email"
               size="small"
-              autoFocus
             />
             <TextField
               margin="normal"
@@ -84,8 +96,10 @@ export function Login() {
             
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  還沒有帳號？
+                <Link to="/auth/register">
+                  <MuiLink variant="body2">
+                    還沒有帳號？
+                  </MuiLink>
                 </Link>
               </Grid>
               <Grid item sx={{ mt: 4 }}>

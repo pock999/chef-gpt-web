@@ -1,9 +1,11 @@
 
 import React from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import {
+  Grid,
+  Box,
+  Button,
+  TextField,
+} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 export function EmptyChat() {

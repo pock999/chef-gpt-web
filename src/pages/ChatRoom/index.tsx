@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { ChatListSection, MessageList } from '../../components';
-import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import {
+  Grid,
+  Divider,
+  Button,
+  TextField,
+} from '@mui/material'
 import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ChatListSection, MessageList } from '../../components';
 
 export function  ChatRoom() {
 

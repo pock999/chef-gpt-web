@@ -1,14 +1,16 @@
 import React from 'react';
-import { NavbarProps } from './navbar-props.model';
+import { useNavigate } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Grid,
+  Typography,
+  Button,
+} from '@mui/material';
 
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { CONFIG } from '../../config';
 import { AuthService } from '../../services';
-import { useNavigate } from 'react-router-dom';
+import { NavbarProps } from './navbar-props.model';
 // import logo from '../../logo.svg';
 
 export function Navbar({title}: NavbarProps) {

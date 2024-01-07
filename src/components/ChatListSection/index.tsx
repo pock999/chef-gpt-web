@@ -1,15 +1,18 @@
 import React from 'react';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import IconButton from '@mui/material/IconButton';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import { ChatListProps } from './chat-list-props.model';
+import {
+  List,
+  ListItemButton,
+  IconButton,
+  Divider,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Typography,
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import dayjs from 'dayjs';
+
+import { ChatListProps } from './chat-list-props.model';
 
 export function ChatListSection({ chatList }: ChatListProps) {
 

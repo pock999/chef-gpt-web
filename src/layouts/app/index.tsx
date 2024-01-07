@@ -4,11 +4,6 @@ import { Navbar } from '../../components';
 import {
   Container
 } from '@mui/material';
-import {RoutesGuard} from '../../shared';
-import { ChatRoom, ChatList } from '../../pages';
-function Other() {
-  return <>Other</>
-}
 
 export function AppLayout() {
 

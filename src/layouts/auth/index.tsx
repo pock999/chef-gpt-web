@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import {
   Container
 } from '@mui/material';
-import { Login, Register } from '../../pages';
 
 export function AuthLayout() {
 

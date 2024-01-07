@@ -14,7 +14,6 @@ import {
   Container,
   Paper
 } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { AuthRegisterReqVO } from '../../api';
 import { AuthService } from '../../services';

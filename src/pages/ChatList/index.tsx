@@ -1,11 +1,14 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { ChatListSection, EmptyChat } from '../../components';
-import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
+import {
+  Grid,
+  Divider,
+  Button,
+} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+
+import { ChatListSection, EmptyChat } from '../../components';
 
 export function  ChatList() {
 

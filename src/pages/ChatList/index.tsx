@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {
@@ -10,10 +10,28 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { ChatListSection, EmptyChat } from '../../components';
 
+import { useConversationStore } from '../../store';
+
 export function  ChatList() {
 
   const theme = useTheme();
   const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
+
+  const {
+    conversationList,
+    pagination,
+    fetchConversationList,
+  } = useConversationStore((state) => ({ 
+    conversationList: state.conversationList, 
+    pagination: state.pagination,
+    fetchConversationList: state.fetchConversationList,
+  }));
+
+  useEffect(() => {
+    if(conversationList.length === 0) {
+      fetchConversationList();
+    }
+  }, []);
 
   return (
     <>

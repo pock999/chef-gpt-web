@@ -1,7 +1,7 @@
-import { http } from '../shared';
-import { AuthRegisterReqVO, AuthRegisterResVO, AuthLoginReqVO, AuthLoginResVO } from './vo';
-import { IResponseDTO } from './dto';
-import { CONFIG } from '../config';
+import { http } from '../../shared';
+import { AuthRegisterReqVO, AuthRegisterResVO, AuthLoginReqVO, AuthLoginResVO } from '../vo';
+import { IResponseDTO } from '../dto';
+import { CONFIG } from '../../config';
 
 export const AuthAPI = {
   async register(payload: AuthRegisterReqVO): Promise<IResponseDTO<AuthRegisterResVO>> {

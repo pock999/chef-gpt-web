@@ -10,7 +10,7 @@ import {
 import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { ChatListSection, MessageList } from '../../components';
+import { ChatListSection, ChatRoomSection, MessageList } from '../../components';
 
 export function  ChatRoom() {
 
@@ -116,64 +116,18 @@ export function  ChatRoom() {
             alignContent: 'center'
           }}
         >
-          <Grid container spacing={1} sx={{ height: '100%', display: 'flex' }}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                height: 'calc(100% - 120px)',
-                width: '100%',
-              }}
-            >
+          <ChatRoomSection
+            messageList={[
               {
-                !matchmdUp &&
-                <Button variant="text" sx={{
-                  position: 'fixed',
-                  top: '0.5rem',
-                  right: '0.5rem',
-                  width: '60px',
-                  height: '60px',
-                  borderRadius: '50%',
-                }}>
-                  <ArrowBackIcon/>
-                </Button>
-              }
-              
-              <MessageList
-                messageList={[
-                  {
-                    message: 'test',
-                    direction: 'receive',
-                  },
-                  {
-                    message: 'test2',
-                    direction: 'send',
-                  },
-                ]}
-              />
-
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                height: '80px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                flexDirection: 'row',
-                borderTop: '1px solid #E0E0E0'
-              }}
-            >
-              <TextField id="outlined-basic" variant="outlined" multiline maxRows={3} label="" sx={{
-                width: 'calc(99% - 88px)',
-                height: '100%'
-              }} />
-              <Button variant="contained" sx={{ width: '80px', marginLeft: '0.5rem', paddingTop: '1rem', paddingBottom: '1rem' }}>
-                <SendIcon></SendIcon>
-              </Button>
-            </Grid>
-          </Grid>
+                message: 'test',
+                direction: 'receive',
+              },
+              {
+                message: 'test2',
+                direction: 'send',
+              },
+            ]}
+          />
         </Grid>
       </Grid>
     </>

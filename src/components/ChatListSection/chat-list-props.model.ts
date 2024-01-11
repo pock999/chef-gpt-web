@@ -1,8 +1,8 @@
 export class ChatItem {
-  avatarImg: string;
+  avatarImg?: string;
   altString?: string;
   title: string;
-  dateTime: string | Date;
+  create_time: string | Date;
 }
 
 export class ChatListProps {

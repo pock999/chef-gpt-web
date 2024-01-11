@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
-export function EmptyChat() {
+export function EmptyChat({ disabled }: {disabled: boolean}) {
   return (
     <>
       <Grid container spacing={1} sx={{ height: '100%', display: 'flex' }}>
@@ -34,7 +34,7 @@ export function EmptyChat() {
                 alignItems: 'center',
               }}
             >
-              <Button variant="contained" sx={{ width: '150px', height: '70px', fontSize: '24px'}}>開始聊天</Button>
+              <Button variant="contained" sx={{ width: '150px', height: '70px', fontSize: '24px'}} disabled={disabled}>開始聊天</Button>
             </Box>
         </Grid>
         <Grid

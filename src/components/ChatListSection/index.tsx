@@ -37,7 +37,7 @@ export function ChatListSection({ chatList }: ChatListProps) {
                         variant="body2"
                         color="text.primary"
                       >
-                        { dayjs(chatItem.dateTime).format('YYYY-MM-DD HH:mm:ss') }
+                        { dayjs(chatItem.create_time).format('YYYY-MM-DD HH:mm:ss') }
                       </Typography>
                     </React.Fragment>
                   }

@@ -6,6 +6,7 @@ import {
   Divider,
   Button,
   TextField,
+  Skeleton,
 } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';
@@ -20,10 +21,12 @@ export function  ChatRoom() {
 
   const {
     conversationList,
+    loading,
     pagination,
     fetchConversationList,
   } = useConversationStore((state) => ({ 
     conversationList: state.conversationList, 
+    loading: state.loading,
     pagination: state.pagination,
     fetchConversationList: state.fetchConversationList,
   }));
@@ -50,72 +53,37 @@ export function  ChatRoom() {
               alignContent: 'center',
             }}
           >
-            <ChatListSection
-              chatList={[
-                {
-                  avatarImg: '/static/images/avatar/2.jpg',
-                  title: '標題1',
-                  dateTime: '2023-01-01 12:00:00'
-                },
-                {
-                  avatarImg: '/static/images/avatar/3.jpg',
-                  title: '標題2',
-                  dateTime: '2023-01-01 11:00:00'
-                },
-                {
-                  avatarImg: '/static/images/avatar/3.jpg',
-                  title: '標題2',
-                  dateTime: '2023-01-01 11:00:00'
-                },
-                {
-                  avatarImg: '/static/images/avatar/3.jpg',
-                  title: '標題2',
-                  dateTime: '2023-01-01 11:00:00'
-                },
-                {
-                  avatarImg: '/static/images/avatar/3.jpg',
-                  title: '標題2',
-                  dateTime: '2023-01-01 11:00:00'
-                },
-                {
-                  avatarImg: '/static/images/avatar/3.jpg',
-                  title: '標題2',
-                  dateTime: '2023-01-01 11:00:00'
-                },
-                {
-                  avatarImg: '/static/images/avatar/3.jpg',
-                  title: '標題2',
-                  dateTime: '2023-01-01 11:00:00'
-                },
-                {
-                  avatarImg: '/static/images/avatar/3.jpg',
-                  title: '標題2',
-                  dateTime: '2023-01-01 11:00:00'
-                },
-                {
-                  avatarImg: '/static/images/avatar/3.jpg',
-                  title: '標題2',
-                  dateTime: '2023-01-01 11:00:00'
-                },
-              ]}
-            />
             {
-              !matchmdUp &&
-              <Button aria-label="delete" size="large" style={{
-                position: 'fixed',
-                bottom: '1rem',
-                right: '1rem',
-                width: '60px',
-                height: '60px',
-                borderRadius: '50%',
-                boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
-              }}
-              variant="contained"
-              >
-                <AddIcon fontSize="inherit" />
-              </Button>
+              loading
+              ?
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <Skeleton variant="rounded" animation="wave" width={280} height={60}  />
+                  <Skeleton variant="rounded" animation="wave" width={280} height={60} sx={{ mt: 1}} />
+                  <Skeleton variant="rounded" animation="wave" width={280} height={60} sx={{ mt: 1}} />
+                </div>
+              :
+              <>
+                <ChatListSection
+                  chatList={conversationList}
+                />
+                {
+                  !matchmdUp &&
+                  <Button aria-label="delete" size="large" style={{
+                    position: 'fixed',
+                    bottom: '1rem',
+                    right: '1rem',
+                    width: '60px',
+                    height: '60px',
+                    borderRadius: '50%',
+                    boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
+                  }}
+                  variant="contained"
+                  >
+                    <AddIcon fontSize="inherit" />
+                  </Button>
+                }
+              </>
             }
-            
             {
               matchmdUp &&
               <Divider sx={{ marginLeft: '1rem' }} orientation="vertical" variant="middle" flexItem />

@@ -7,6 +7,9 @@ import {
 } from '../shared';
 
 export const ConversationService = {
+  /**
+   * 取得對話的訊息列表
+   */
   async getConversationList(payload: ConversationGetListQueryReqVO) {
     try {
       const result = await ConversationAPI.getConversationList(payload);

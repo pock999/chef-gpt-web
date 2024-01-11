@@ -31,13 +31,39 @@ export const ConversationAPI = {
     };
   },
   async createConversation() {
-    // post /conversations
-  },
-  async deleteConversation() {
-    // delete /conversations
+    const res = await http.post(`/conversations`, null, {
+      headers: {
+        token: localStorage.getItem(CONFIG.tokenKey),
+      }
+    });
 
+    return {
+      ...res.data,
+      status: res.status,
+    };
   },
-  async getTitle() {
-    // get /titles
+  async deleteConversation(conversationId: number) {
+    const res = await http.delete(`/conversations/${conversationId}`, {
+      headers: {
+        token: localStorage.getItem(CONFIG.tokenKey),
+      }
+    });
+
+    return {
+      ...res.data,
+      status: res.status,
+    };
+  },
+  async getTitle(conversationId: number) {
+    const res = await http.get(`/titles/${conversationId}`, {
+      headers: {
+        token: localStorage.getItem(CONFIG.tokenKey),
+      }
+    });
+
+    return {
+      ...res.data,
+      status: res.status,
+    };
   },
 };

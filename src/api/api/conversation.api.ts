@@ -9,11 +9,11 @@ export const ConversationAPI = {
 
     let queryParams: string[] = [];
 
-    if(!_.isEmpty(payload.page)) {
+    if(_.get(payload, 'page')) {
       queryParams.push(`page=${payload.page}`);
     }
 
-    if(!_.isEmpty(payload.count)) {
+    if(_.get(payload, 'count')) {
       queryParams.push(`count=${payload.count}`);
     }
 

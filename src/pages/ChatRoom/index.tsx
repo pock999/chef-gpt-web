@@ -12,32 +12,67 @@ import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { ChatListSection, ChatRoomSection, MessageList } from '../../components';
-import { useConversationStore } from '../../store';
+import { useConversationStore, useMessageStore } from '../../store';
+import { useParams } from 'react-router-dom';
 
 export function  ChatRoom() {
 
   const theme = useTheme();
   const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
 
+  const { id } = useParams();
+
   // TODO: 分頁
   const {
     conversationList,
-    loading,
+    listLoading,
     pagination,
     fetchConversationList,
+    getTitle,
+    currentConversation,
   } = useConversationStore((state) => ({ 
     conversationList: state.conversationList, 
-    loading: state.loading,
+    listLoading: state.listLoading,
     pagination: state.pagination,
     fetchConversationList: state.fetchConversationList,
+    getTitle: state.getTitle,
+    currentConversation: state.conversationList.find(item => `${item.id}` === `${id}`),
+  }));
+
+  const {
+    msgList,
+    msgListLoading,
+    postMessage,
+    fetchMessageList,
+  } = useMessageStore((state) => ({
+    msgList: state.msgList,
+    msgListLoading: state.listLoading,
+    msgPagination: state.pagination,
+    postMessage: state.postMessage,
+    fetchMessageList: state.fetchMessageList,
   }));
 
   useEffect(() => {
     if(conversationList.length === 0) {
       fetchConversationList();
     }
-  }, []);
 
+    if(typeof id !== 'undefined') {
+      fetchMessageList(id);
+    }
+
+  }, [id]);
+
+  const sendMessage = async (question: string) => {
+    if(typeof currentConversation !== 'undefined') {
+      await postMessage(currentConversation.id, question);
+
+      if(currentConversation?.title === null) {
+        await getTitle(currentConversation.id);
+      }
+    }
+  };
+  
   return (
     <>
       <Grid container spacing={1} sx={{ height: '100%' }}>
@@ -55,7 +90,7 @@ export function  ChatRoom() {
             }}
           >
             {
-              loading
+              listLoading
               ?
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <Skeleton variant="rounded" animation="wave" width={280} height={60}  />
@@ -65,6 +100,7 @@ export function  ChatRoom() {
               :
               <>
                 <ChatListSection
+                  selected={id}
                   chatList={conversationList}
                 />
                 {
@@ -103,16 +139,9 @@ export function  ChatRoom() {
           }}
         >
           <ChatRoomSection
-            messageList={[
-              {
-                message: 'test',
-                direction: 'receive',
-              },
-              {
-                message: 'test2',
-                direction: 'send',
-              },
-            ]}
+            messageList={msgList}
+            sendMessage={sendMessage}
+            loading={msgListLoading}
           />
         </Grid>
       </Grid>

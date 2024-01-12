@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+  Link,
+} from 'react-router-dom';
+import {
   List,
   ListItemButton,
   IconButton,
@@ -15,7 +18,7 @@ import dayjs from 'dayjs';
 
 import { ChatListProps } from './chat-list-props.model';
 
-export function ChatListSection({ chatList }: ChatListProps) {
+export function ChatListSection({ chatList, selected }: ChatListProps) {
 
   return (
     <>
@@ -23,7 +26,13 @@ export function ChatListSection({ chatList }: ChatListProps) {
         {
           chatList.map(chatItem => (
             <>
-              <ListItemButton alignItems="flex-start">
+              <ListItemButton
+                alignItems="flex-start"
+                selected={!!selected ? `${selected}`===`${chatItem.id}` : false}
+                key={chatItem.id}
+                component={Link}
+                to={`/app/chat/${chatItem.id}`}
+              >
                 <ListItemAvatar>
                   <Avatar alt={chatItem.altString} src={chatItem.avatarImg} />
                 </ListItemAvatar>

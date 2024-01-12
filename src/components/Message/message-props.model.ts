@@ -1,6 +1,8 @@
 export class MessageProps {
-  message: string = '';
+  id: number;
+  content: string = '';
   backgroundColor?: string = '#dddddd';
-  direction?: 'send' | 'receive' = 'receive';
+  role: 'user' | 'ai' = 'user';
   avartarImg?: string = '/static/images/avatar/1.jpg';
+  create_time?: string;
 }

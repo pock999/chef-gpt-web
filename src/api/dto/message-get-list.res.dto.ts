@@ -1,4 +1,4 @@
-import { MessageGetListItemResVO } from "../vo";
+import { MessageVO } from "../vo";
 import { IResponseDTO } from "./response.dto";
 
 export class MessageGetListResDTO implements IResponseDTO<any> {
@@ -9,6 +9,6 @@ export class MessageGetListResDTO implements IResponseDTO<any> {
       total_count: number;
       total_page: number;
     };
-    messages: Array<MessageGetListItemResVO>;
+    messages: Array<MessageVO>;
   };
 }

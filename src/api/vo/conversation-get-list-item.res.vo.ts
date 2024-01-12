@@ -1,6 +1,6 @@
 export class ConversationGetListItemResVO {
   id: number;
-  title: string;
+  title: string | null;
   create_time: string;
   avatarImg?: string;
 }

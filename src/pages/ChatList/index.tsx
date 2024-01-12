@@ -21,12 +21,12 @@ export function  ChatList() {
   // TODO: 分頁
   const {
     conversationList,
-    loading,
+    listLoading,
     pagination,
     fetchConversationList,
   } = useConversationStore((state) => ({ 
     conversationList: state.conversationList, 
-    loading: state.loading,
+    listLoading: state.listLoading,
     pagination: state.pagination,
     fetchConversationList: state.fetchConversationList,
   }));
@@ -52,7 +52,7 @@ export function  ChatList() {
           }}
         >
           {
-            loading
+            listLoading
             ?
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <Skeleton variant="rounded" animation="wave" width={280} height={60}  />
@@ -62,6 +62,7 @@ export function  ChatList() {
             :
             <>
               <ChatListSection
+                selected={null}
                 chatList={conversationList}
               />
               {
@@ -100,7 +101,7 @@ export function  ChatList() {
               alignContent: 'center'
             }}
           >
-            <EmptyChat disabled={loading}/>
+            <EmptyChat disabled={listLoading}/>
           </Grid>
         }
         

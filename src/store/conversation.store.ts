@@ -5,7 +5,7 @@ import { ConversationService } from '../services';
 
 interface ConversationState {
   conversationList: Array<ConversationGetListItemResVO>;
-  loading: boolean;
+  listLoading: boolean;
   pagination: {
     // current page
     page: number;
@@ -22,11 +22,13 @@ interface ConversationState {
     totalCount: number;
   }) => void;
   fetchConversationList: () => Promise<void>;
+  createConversation: () => Promise<number>;
+  getTitle: (conversationId: number | string) => Promise<string>;
 }
 
 export const useConversationStore = create<ConversationState>((set, get) => ({
   conversationList: [],
-  loading: false,
+  listLoading: false,
   pagination: {
     page: 1,
     count: 20,
@@ -41,13 +43,13 @@ export const useConversationStore = create<ConversationState>((set, get) => ({
   })),
   fetchConversationList: async () => {
     set({
-      loading: true,
+      listLoading: true,
     });
     const {page, count} = get().pagination;
     const data = await ConversationService.getConversationList({page, count});
     set({
       conversationList: data.conversations,
-      loading: false,
+      listLoading: false,
       pagination: {
         page,
         count,
@@ -55,5 +57,22 @@ export const useConversationStore = create<ConversationState>((set, get) => ({
         totalPage: data.page.total_page,        
       }
     });
+  },
+  createConversation: async (): Promise<number> => {
+    const {conversationList} = get();
+    const createConversationResult = await ConversationService.createConversation();
+
+    set({
+      conversationList: [...conversationList, {
+        ...createConversationResult,
+        title: null, // 先下 null
+      }],
+    });
+
+    return createConversationResult.id;
+  },
+  getTitle: async (conversationId: number | string) => {
+    const result = await ConversationService.getTitle(+conversationId);
+    return result.title;
   },
 }));

@@ -1,5 +1,5 @@
 export class CreateConversationResVO {
   id: number;
-  title: string;
+  title: string | null;
   create_time: string;
 }

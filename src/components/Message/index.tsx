@@ -7,9 +7,10 @@ import {
 } from '@mui/material';
 
 export function Message({
-  message,
+  id,
+  content,
   backgroundColor,
-  direction,
+  role,
   avartarImg
 }: MessageProps) {
   return (
@@ -17,10 +18,11 @@ export function Message({
       style={{
         flex: 1,
         display: 'flex',
-        flexDirection: direction === 'send' ? 'row-reverse' : 'row',
+        flexDirection: role === 'user' ? 'row-reverse' : 'row',
         justifyContent: 'flex-start',
         marginBottom: '0.5rem'
       }}
+      key={id}
     >
       <Avatar alt={avartarImg} src={avartarImg} sx={{ m: 0.5 }} />
       <Paper
@@ -31,7 +33,7 @@ export function Message({
           m: 0.5,
         }}
       >
-        <Typography variant="body1">{message}</Typography>
+        <Typography variant="body1">{content}</Typography>
       </Paper>
     </div>
   );

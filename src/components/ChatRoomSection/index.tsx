@@ -1,14 +1,21 @@
 import { Grid, Button, TextField, useTheme, useMediaQuery } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { MessageList } from '../MessageList';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import { ChatRoomProps } from './chat-room-props.model';
 
-export function ChatRoomSection({ messageList }:ChatRoomProps) {
+export function ChatRoomSection({ messageList, loading, sendMessage }: ChatRoomProps) {
+
+  const [inputText, setInputText] = useState<string>('');
 
   const theme = useTheme();
   const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
+
+  const enterInput = async () => {
+    await sendMessage(inputText);
+    setInputText('');
+  };
 
   return (
     <>
@@ -52,11 +59,30 @@ export function ChatRoomSection({ messageList }:ChatRoomProps) {
             borderTop: '1px solid #E0E0E0'
           }}
         >
-          <TextField id="outlined-basic" variant="outlined" multiline maxRows={3} label="" sx={{
-            width: 'calc(99% - 88px)',
-            height: '100%'
-          }} />
-          <Button variant="contained" sx={{ width: '80px', marginLeft: '0.5rem', paddingTop: '1rem', paddingBottom: '1rem' }}>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            multiline
+            maxRows={3}
+            label=""
+            sx={{
+              width: 'calc(99% - 88px)',
+              height: '100%'
+            }}
+            value={inputText}
+            onChange={(evt) => setInputText(evt.target.value)}
+          />
+          <Button
+            variant="contained"
+            sx={{
+              width: '80px',
+              marginLeft: '0.5rem',
+              paddingTop: '1rem',
+              paddingBottom: '1rem',
+            }}
+            disabled={!inputText}
+            onClick={() => enterInput()}
+          >
             <SendIcon></SendIcon>
           </Button>
         </Grid>

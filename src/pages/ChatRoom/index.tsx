@@ -102,6 +102,7 @@ export function  ChatRoom() {
                 <ChatListSection
                   selected={id}
                   chatList={conversationList}
+                  showAddButton={matchmdUp}
                 />
                 {
                   !matchmdUp &&

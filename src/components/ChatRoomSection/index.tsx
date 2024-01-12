@@ -1,5 +1,6 @@
 import { Grid, Button, TextField, useTheme, useMediaQuery } from '@mui/material';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { MessageList } from '../MessageList';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
@@ -30,16 +31,19 @@ export function ChatRoomSection({ messageList, loading, sendMessage }: ChatRoomP
         >
           {
             !matchmdUp &&
-            <Button variant="text" sx={{
-              position: 'fixed',
-              top: '0.5rem',
-              right: '0.5rem',
-              width: '60px',
-              height: '60px',
-              borderRadius: '50%',
-            }}>
-              <ArrowBackIcon/>
-            </Button>
+            <Link to="/app/chat">
+              <Button variant="contained" sx={{
+                position: 'fixed',
+                top: 'calc(0.5rem + 87px)',
+                left: '0.5rem',
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                zIndex: 5,
+              }}>
+                <ArrowBackIcon/>
+              </Button>
+            </Link>
           }
           
           <MessageList

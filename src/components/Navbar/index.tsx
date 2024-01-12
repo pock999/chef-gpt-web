@@ -72,7 +72,7 @@ export function Navbar({title}: NavbarProps) {
             >
               {
                 isAuth &&
-                <Button variant="contained" onClick={() => logout()} style={{
+                <Button variant="outlined" onClick={() => logout()} style={{
                   maxHeight: '70px',
                 }}>登出</Button>
               }

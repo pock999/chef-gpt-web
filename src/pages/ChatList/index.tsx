@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {
@@ -18,17 +19,21 @@ export function  ChatList() {
   const theme = useTheme();
   const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
 
+  const navigate = useNavigate();
+
   // TODO: 分頁
   const {
     conversationList,
     listLoading,
     pagination,
     fetchConversationList,
+    createConversation
   } = useConversationStore((state) => ({ 
     conversationList: state.conversationList, 
     listLoading: state.listLoading,
     pagination: state.pagination,
     fetchConversationList: state.fetchConversationList,
+    createConversation: state.createConversation,
   }));
 
   useEffect(() => {
@@ -36,6 +41,11 @@ export function  ChatList() {
       fetchConversationList();
     }
   }, []);
+
+  const startConversation = async () => {
+    const id = await createConversation();
+    navigate(`/app/chat/${id}`);
+  };
 
   return (
     <>
@@ -64,19 +74,21 @@ export function  ChatList() {
               <ChatListSection
                 selected={null}
                 chatList={conversationList}
+                showAddButton={false}
               />
               {
                 !matchmdUp &&
                 <Button aria-label="delete" size="large" style={{
-                  position: 'fixed',
-                  bottom: '1rem',
-                  right: '1rem',
-                  width: '60px',
-                  height: '60px',
-                  borderRadius: '50%',
-                  boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
-                }}
-                variant="contained"
+                    position: 'fixed',
+                    bottom: '1rem',
+                    right: '1rem',
+                    width: '60px',
+                    height: '60px',
+                    borderRadius: '50%',
+                    boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
+                  }}
+                  variant="contained"
+                  onClick={() => startConversation()}
                 >
                   <AddIcon fontSize="inherit" />
                 </Button>

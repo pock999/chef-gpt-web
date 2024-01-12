@@ -7,3 +7,7 @@ export * from './conversation-get-list-item.res.vo';
 export * from './message-get-list-query.req.vo';
 export * from './message-get-list-item.res.vo';
 export * from './post-message.req.vo';
+export * from './message.vo';
+export * from './message-detail.res.vo';
+export * from './create-conversation.res.vo';
+export * from './get-titles.res.vo';

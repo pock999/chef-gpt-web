@@ -1,8 +1,8 @@
 import { http } from '../../shared';
 import { CONFIG } from '../../config';
 import _ from 'lodash';
-import { MessageGetListQueryReqVO, PostMessageReqVO } from '../vo';
-import { MessageGetListResDTO } from '../dto';
+import { MessageDetailResVO, MessageGetListQueryReqVO, PostMessageReqVO } from '../vo';
+import { IResponseDTO, MessageGetListResDTO } from '../dto';
 
 export const MessageAPI = {
   /**
@@ -35,7 +35,7 @@ export const MessageAPI = {
   /**
    * 新增對話的訊息 API
    */
-  async postMessage(payload: PostMessageReqVO) {
+  async postMessage(payload: PostMessageReqVO): Promise<IResponseDTO<MessageDetailResVO>> {
     const res = await http.post(`/messages`, payload, {
       headers: {
         token: localStorage.getItem(CONFIG.tokenKey),

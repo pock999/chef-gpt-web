@@ -1,6 +1,6 @@
 import { http } from '../../shared';
-import { ConversationGetListQueryReqVO } from '../vo';
-import { ConversationGetListResDTO } from '../dto';
+import { ConversationGetListQueryReqVO, CreateConversationResVO, GetTitlesResVO } from '../vo';
+import { ConversationGetListResDTO, IResponseDTO } from '../dto';
 import { CONFIG } from '../../config';
 import _ from 'lodash';
 
@@ -36,7 +36,7 @@ export const ConversationAPI = {
   /**
    * 新增對話 API
    */
-  async createConversation() {
+  async createConversation(): Promise<IResponseDTO<CreateConversationResVO>> {
     const res = await http.post(`/conversations`, null, {
       headers: {
         token: localStorage.getItem(CONFIG.tokenKey),
@@ -51,7 +51,7 @@ export const ConversationAPI = {
   /**
    * 刪除對話 API
    */
-  async deleteConversation(conversationId: number) {
+  async deleteConversation(conversationId: number): Promise<IResponseDTO<any>> {
     const res = await http.delete(`/conversations/${conversationId}`, {
       headers: {
         token: localStorage.getItem(CONFIG.tokenKey),
@@ -66,7 +66,7 @@ export const ConversationAPI = {
   /**
    * 取得對話標題 API
    */
-  async getTitle(conversationId: number) {
+  async getTitle(conversationId: number): Promise<IResponseDTO<GetTitlesResVO>> {
     const res = await http.get(`/titles/${conversationId}`, {
       headers: {
         token: localStorage.getItem(CONFIG.tokenKey),

@@ -4,3 +4,6 @@ export * from './auth-login.req.vo';
 export * from './auth-login.res.vo';
 export * from './conversation-get-list-query.req.vo';
 export * from './conversation-get-list-item.res.vo';
+export * from './message-get-list-query.req.vo';
+export * from './message-get-list-item.res.vo';
+export * from './post-message.req.vo';

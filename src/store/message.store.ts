@@ -47,7 +47,7 @@ export const useMessageStore = create<MessageState>((set, get) => ({
     const {page, count} = get().pagination;
     const data = await MessageService.getMessageList(+conversationId, {page, count});
     set({
-      msgList: data.messages,
+      msgList: data.messages.reverse(),
       listLoading: false,
       pagination: {
         page,

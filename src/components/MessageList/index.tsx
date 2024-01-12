@@ -6,7 +6,8 @@ export function MessageList({messageList}: MessageListProps) {
   return (
     <div
       style={{
-        flex: 1
+        flex: 1,
+        paddingBottom: '2rem'
       }}
     >
       {

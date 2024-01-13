@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Link, useNavigate,
 } from 'react-router-dom';
@@ -19,10 +19,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  CircularProgress
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
+import LoopIcon from '@mui/icons-material/Loop';
 import dayjs from 'dayjs';
 
 import { ChatListProps } from './chat-list-props.model';
@@ -74,6 +76,15 @@ export function ChatListSection({ chatList, selected, showAddButton }: ChatListP
     setOpenConfrim(false);
   }
 
+  const scrollRef = useRef(null);
+
+  const handleScroll = async (evt) => {
+    if(evt.currentTarget.scrollHeight - evt.currentTarget.scrollTop - 30 < (scrollRef.current as any).clientHeight) {
+      console.log('load conversation');
+    }
+    
+  }
+
   return (
     <>
       <Dialog
@@ -94,57 +105,75 @@ export function ChatListSection({ chatList, selected, showAddButton }: ChatListP
           <Button onClick={() => deleteChat()}>確認</Button>
         </DialogActions>
       </Dialog>
-      <List sx={{ width: '100%', bgcolor: 'background.paper', overflow: 'auto', maxHeight: 'calc(100% - 88px)', }}>
-        {
-          chatList.map(chatItem => (
-            <>
-              <ListItemButton
-                alignItems="flex-start"
-                selected={!!selected ? `${selected}`===`${chatItem.id}` : false}
-                key={chatItem.id}
-                component={Link}
-                to={`/app/chat/${chatItem.id}`}
-              >
-                <ListItemAvatar>
-                  <Avatar alt={chatItem.altString} src={chatItem.avatarImg} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={chatItem.title}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: 'inline' }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        { dayjs(chatItem.create_time).format('YYYY-MM-DD HH:mm:ss') }
-                      </Typography>
-                    </React.Fragment>
-                  }
-                />
-                <IconButton aria-label="delete" onClick={(evt) => deleteConfirm(evt, chatItem.id)}>
-                  <CloseIcon/>
-                </IconButton>
-              </ListItemButton>
-              <Divider variant="inset" component="li" />
-            </>
-          ))
-        }
-        {
-          showAddButton &&
-          <ListItemButton
-            alignItems="center"
-            onClick={() => startConversation()}
-          >
-            <ListItemIcon>
-              <AddIcon />
-            </ListItemIcon>
-            <ListItemText primary="開始新對話" />
-          </ListItemButton>
-        }
-        
-      </List>
+      <div
+        style={{
+          overflow: 'auto', maxHeight: 'calc(100vh - 110px)'
+        }}
+        ref={scrollRef}
+        onScroll={handleScroll}
+      >
+        <List sx={{ width: '100%', bgcolor: 'background.paper', height: '100%', }}>
+          {
+            showAddButton &&
+            <ListItemButton
+              alignItems="center"
+              onClick={() => startConversation()}
+            >
+              <ListItemIcon>
+                <AddIcon />
+              </ListItemIcon>
+              <ListItemText primary="開始新對話" />
+            </ListItemButton>
+          }
+          {
+            chatList.map(chatItem => (
+              <>
+                <ListItemButton
+                  alignItems="flex-start"
+                  selected={!!selected ? `${selected}`===`${chatItem.id}` : false}
+                  key={chatItem.id}
+                  component={Link}
+                  to={`/app/chat/${chatItem.id}`}
+                >
+                  <ListItemAvatar>
+                    <Avatar alt={chatItem.altString} src={chatItem.avatarImg} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={chatItem.title}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+                          { dayjs(chatItem.create_time).format('YYYY-MM-DD HH:mm:ss') }
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  />
+                  <IconButton aria-label="delete" onClick={(evt) => deleteConfirm(evt, chatItem.id)}>
+                    <CloseIcon/>
+                  </IconButton>
+                </ListItemButton>
+                <Divider variant="inset" component="li" />
+              </>
+            ))
+          }
+            <ListItemButton
+              alignItems="center"
+              sx={{ display: 'flex', justifyContent: 'center'}}
+            >
+              {/* <ListItemIcon>
+                <LoopIcon />
+              </ListItemIcon>
+              <ListItemText primary="" /> */}
+              <CircularProgress />
+            </ListItemButton>
+        </List>
+      </div>
+      
     </>
   );
 }

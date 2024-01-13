@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageListProps } from './message-list-props.model';
 import { Message } from '../Message';
+import {
+  CircularProgress,
+} from '@mui/material';
 
 export function MessageList({messageList, responseProgress}: MessageListProps) {
   const [hasInit, setHasInit] = React.useState<boolean>(false);
@@ -39,6 +42,10 @@ export function MessageList({messageList, responseProgress}: MessageListProps) {
       }}
       onScroll={handleScroll}
     >
+      {/* TODO: 判斷需不需要顯示 loading，如果現在訊息已等於 total 不顯示 */}
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
+        <CircularProgress />
+      </div>
       {
         messageList.map(message => (
           <Message {...message}/>

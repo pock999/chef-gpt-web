@@ -27,12 +27,20 @@ export const useMessageStore = create<MessageState>((set, get) => ({
   },
   postMessage: async (conversationId: number | string, question: string) => {
 
+    const { msgList } = get();
+
+    // temp
+    set({
+      msgList: [...msgList, {
+        id: -1,
+        role: 'user',
+        content: question,
+      }],
+    });
     const data = await MessageService.postMessage({
       conversation_id: +conversationId,
       question,
     });
-
-    const { msgList } = get();
 
     set({
       msgList: [...msgList, data.question, data.answer],

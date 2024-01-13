@@ -5,4 +5,5 @@ export class MessageProps {
   role: 'user' | 'ai' = 'user';
   avartarImg?: string = '/static/images/avatar/1.jpg';
   create_time?: string;
+  progress?: boolean = false;
 }

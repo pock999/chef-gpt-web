@@ -3,7 +3,8 @@ import { MessageProps } from './message-props.model';
 import {
   Avatar,
   Typography,
-  Paper
+  Paper,
+  CircularProgress
 } from '@mui/material';
 
 export function Message({
@@ -11,7 +12,8 @@ export function Message({
   content,
   backgroundColor,
   role,
-  avartarImg
+  avartarImg,
+  progress
 }: MessageProps) {
   return (
     <div
@@ -31,9 +33,13 @@ export function Message({
           p: 1,
           backgroundColor,
           m: 0.5,
+          display: 'flex',
         }}
       >
         <Typography variant="body1">{content}</Typography>
+        {
+          progress && <CircularProgress size={20} />
+        }
       </Paper>
     </div>
   );

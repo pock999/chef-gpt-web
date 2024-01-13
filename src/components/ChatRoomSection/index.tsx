@@ -1,4 +1,4 @@
-import { Grid, Button, TextField, useTheme, useMediaQuery } from '@mui/material';
+import { Grid, Button, TextField, useTheme, useMediaQuery, Paper } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MessageList } from '../MessageList';
@@ -9,13 +9,16 @@ import { ChatRoomProps } from './chat-room-props.model';
 export function ChatRoomSection({ messageList, loading, sendMessage }: ChatRoomProps) {
 
   const [inputText, setInputText] = useState<string>('');
+  const [aiLoading, setAiLoading] = useState<boolean>(false);
 
   const theme = useTheme();
   const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   const enterInput = async () => {
+    setAiLoading(true);
     await sendMessage(inputText);
     setInputText('');
+    setAiLoading(false);
   };
 
   return (
@@ -48,8 +51,8 @@ export function ChatRoomSection({ messageList, loading, sendMessage }: ChatRoomP
           
           <MessageList
             messageList={messageList}
+            responseProgress={aiLoading}
           />
-
         </Grid>
         <Grid
           item

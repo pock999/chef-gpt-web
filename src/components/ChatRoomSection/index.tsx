@@ -6,7 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import { ChatRoomProps } from './chat-room-props.model';
 
-export function ChatRoomSection({ messageList, loading, sendMessage }: ChatRoomProps) {
+export function ChatRoomSection({ messageList, loading, sendMessage, hasMore }: ChatRoomProps) {
 
   const [inputText, setInputText] = useState<string>('');
   const [aiLoading, setAiLoading] = useState<boolean>(false);
@@ -52,6 +52,7 @@ export function ChatRoomSection({ messageList, loading, sendMessage }: ChatRoomP
           <MessageList
             messageList={messageList}
             responseProgress={aiLoading}
+            hasMore={hasMore}
           />
         </Grid>
         <Grid

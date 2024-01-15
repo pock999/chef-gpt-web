@@ -39,7 +39,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export function ChatListSection({ chatList, selected, showAddButton }: ChatListProps) {
+export function ChatListSection({ chatList, selected, showAddButton, hasMore }: ChatListProps) {
   const [openConfirm, setOpenConfrim] = React.useState<boolean>(false);
   const [currentConversationId, setCurrentConversationId] = React.useState<number>(0);
   const navigate = useNavigate();
@@ -80,7 +80,10 @@ export function ChatListSection({ chatList, selected, showAddButton }: ChatListP
 
   const handleScroll = async (evt) => {
     if(evt.currentTarget.scrollHeight - evt.currentTarget.scrollTop - 30 < (scrollRef.current as any).clientHeight) {
-      console.log('load conversation');
+      if(hasMore) {
+        console.log('load');
+        // TODO: load 更多對話列表
+      }
     }
     
   }
@@ -161,16 +164,17 @@ export function ChatListSection({ chatList, selected, showAddButton }: ChatListP
               </>
             ))
           }
+          {
+            hasMore
+            &&
             <ListItemButton
               alignItems="center"
               sx={{ display: 'flex', justifyContent: 'center'}}
             >
-              {/* <ListItemIcon>
-                <LoopIcon />
-              </ListItemIcon>
-              <ListItemText primary="" /> */}
               <CircularProgress />
             </ListItemButton>
+          }
+            
         </List>
       </div>
       

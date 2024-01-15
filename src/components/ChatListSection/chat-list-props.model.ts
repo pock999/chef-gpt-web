@@ -10,4 +10,5 @@ export class ChatListProps {
   selected: null | number | undefined | string;
   chatList: Array<ChatItem>;
   showAddButton: boolean;
+  hasMore: boolean = false;
 }

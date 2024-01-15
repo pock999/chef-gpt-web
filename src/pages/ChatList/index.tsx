@@ -46,7 +46,7 @@ export function  ChatList() {
     const id = await createConversation();
     navigate(`/app/chat/${id}`);
   };
-
+  
   return (
     <>
       <Grid container spacing={1} sx={{ height: '100%' }}>
@@ -75,6 +75,7 @@ export function  ChatList() {
                 selected={null}
                 chatList={conversationList}
                 showAddButton={false}
+                hasMore={pagination.totalCount > conversationList.length}
               />
               {
                 !matchmdUp &&

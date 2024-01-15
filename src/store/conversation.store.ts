@@ -74,9 +74,13 @@ export const useConversationStore = create<ConversationState>((set, get) => ({
   },
   deleteConversation: async (conversationId: number | string) => {
     await ConversationService.deleteConversation(+conversationId);
-    const {conversationList} = get();
+    const {conversationList, pagination} = get();
     set({
       conversationList: conversationList.filter(item => `${item.id}` !== `${conversationId}`),
+      pagination: {
+        ...pagination,
+        totalCount: pagination.totalCount - 1,
+      },
     });
   },
   getTitle: async (conversationId: number | string) => {

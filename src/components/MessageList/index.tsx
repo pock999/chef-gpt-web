@@ -5,7 +5,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 
-export function MessageList({messageList, responseProgress}: MessageListProps) {
+export function MessageList({messageList, responseProgress, hasMore}: MessageListProps) {
   const [hasInit, setHasInit] = React.useState<boolean>(false);
 
   const messagesEndRef = useRef(null);
@@ -28,7 +28,10 @@ export function MessageList({messageList, responseProgress}: MessageListProps) {
   }
 
   const loadMore = () => {
-    console.log('loadMore');
+    if(hasMore) {
+      console.log('loadMore');
+      // TODO load more
+    }
   };
 
   return (
@@ -42,10 +45,13 @@ export function MessageList({messageList, responseProgress}: MessageListProps) {
       }}
       onScroll={handleScroll}
     >
-      {/* TODO: 判斷需不需要顯示 loading，如果現在訊息已等於 total 不顯示 */}
-      <div style={{ display: 'flex', justifyContent: 'center'}}>
-        <CircularProgress />
-      </div>
+      {
+        hasMore &&
+        <div style={{ display: 'flex', justifyContent: 'center'}}>
+          <CircularProgress />
+        </div>
+      }
+      
       {
         messageList.map(message => (
           <Message {...message}/>

@@ -42,6 +42,7 @@ export function  ChatRoom() {
   const {
     msgList,
     msgListLoading,
+    msgPagination,
     postMessage,
     fetchMessageList,
   } = useMessageStore((state) => ({
@@ -103,6 +104,7 @@ export function  ChatRoom() {
                   selected={id}
                   chatList={conversationList}
                   showAddButton={matchmdUp}
+                  hasMore={pagination.totalCount > conversationList.length}
                 />
                 {
                   !matchmdUp &&
@@ -143,6 +145,7 @@ export function  ChatRoom() {
             messageList={msgList}
             sendMessage={sendMessage}
             loading={msgListLoading}
+            hasMore={msgPagination.totalCount > msgList.length}
           />
         </Grid>
       </Grid>

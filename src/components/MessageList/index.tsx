@@ -5,7 +5,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 
-export function MessageList({messageList, responseProgress, hasMore}: MessageListProps) {
+export function MessageList({messageList, responseProgress, hasMore, conversationId, fetchMore}: MessageListProps) {
   const [hasInit, setHasInit] = React.useState<boolean>(false);
 
   const messagesEndRef = useRef(null);
@@ -16,7 +16,9 @@ export function MessageList({messageList, responseProgress, hasMore}: MessageLis
 
     // 已經執行過一次
     if(!hasInit) {
-      setHasInit(true);
+      setTimeout(() => {
+        setHasInit(true);
+      }, 1500);
     }
 
   }, [messageList, responseProgress]);
@@ -27,10 +29,9 @@ export function MessageList({messageList, responseProgress, hasMore}: MessageLis
     }
   }
 
-  const loadMore = () => {
+  const loadMore = async () => {
     if(hasMore) {
-      console.log('loadMore');
-      // TODO load more
+      await fetchMore(conversationId, false);
     }
   };
 

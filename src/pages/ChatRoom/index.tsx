@@ -58,7 +58,7 @@ export function  ChatRoom() {
       if(conversationList.length === 0) {
         fetchConversationList(true);
       }
-      fetchMessageList(id);
+      fetchMessageList(id, true);
     }
 
   }, [id]);
@@ -140,12 +140,19 @@ export function  ChatRoom() {
             alignContent: 'center'
           }}
         >
-          <ChatRoomSection
-            messageList={msgList}
-            sendMessage={sendMessage}
-            loading={msgListLoading}
-            hasMore={msgPagination.totalCount > msgList.length}
-          />
+          {
+            (typeof id !== 'undefined')
+            &&
+            <ChatRoomSection
+              messageList={msgList}
+              sendMessage={sendMessage}
+              loading={msgListLoading}
+              conversationId={id}
+              fetchMore={fetchMessageList}
+              hasMore={msgPagination.totalCount > msgList.length}
+            />
+          }
+          
         </Grid>
       </Grid>
     </>

@@ -5,4 +5,6 @@ export class ChatRoomProps {
   sendMessage: Function;
   loading: boolean;
   hasMore: boolean = false;
+  conversationId: number | string;
+  fetchMore: Function;
 }

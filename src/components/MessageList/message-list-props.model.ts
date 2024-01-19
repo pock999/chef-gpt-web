@@ -4,4 +4,6 @@ export class MessageListProps {
   messageList: Array<MessageProps>;
   responseProgress: boolean;
   hasMore: boolean;
+  conversationId: string | number;
+  fetchMore: Function;
 }

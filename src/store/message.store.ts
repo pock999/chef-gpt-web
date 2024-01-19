@@ -13,7 +13,7 @@ interface MessageState {
     totalCount: number;
   };
   postMessage: (conversationId: number | string, question: string) => Promise<void>;
-  fetchMessageList:(conversationId: number | string) => Promise<void>;
+  fetchMessageList:(conversationId: number | string, isInit: boolean) => Promise<void>;
 }
 
 export const useMessageStore = create<MessageState>((set, get) => ({
@@ -27,7 +27,7 @@ export const useMessageStore = create<MessageState>((set, get) => ({
   },
   postMessage: async (conversationId: number | string, question: string) => {
 
-    const { msgList } = get();
+    const { msgList, pagination} = get();
 
     // temp
     set({
@@ -44,21 +44,39 @@ export const useMessageStore = create<MessageState>((set, get) => ({
 
     set({
       msgList: [...msgList, data.question, data.answer],
+      pagination: {
+        ...pagination,
+        totalCount: pagination.totalCount + 1,
+      }
     });
 
   },
-  fetchMessageList: async (conversationId: number | string) => {
+  fetchMessageList: async (conversationId: number | string, isInit: boolean = false) => {
+    const { msgList } = get();
+
     set({
       listLoading: true,
     });
 
     const {page, count} = get().pagination;
-    const data = await MessageService.getMessageList(+conversationId, {page, count});
+    let newPage = page;
+    let newMsgList: Array<MessageVO> = [];
+
+    if(!isInit) {
+      newPage += 1;
+      newMsgList = [...msgList];
+    } else {
+      newPage = 1;
+    }
+    
+    const data = await MessageService.getMessageList(+conversationId, {page: newPage, count});
+
+    newMsgList = [...data.messages.reverse(), ...newMsgList];
     set({
-      msgList: data.messages.reverse(),
+      msgList: newMsgList,
       listLoading: false,
       pagination: {
-        page,
+        page: newPage,
         count,
         totalCount: data.page.total_count,        
         totalPage: data.page.total_page,        

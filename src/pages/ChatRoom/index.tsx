@@ -54,11 +54,10 @@ export function  ChatRoom() {
   }));
 
   useEffect(() => {
-    if(conversationList.length === 0) {
-      fetchConversationList();
-    }
-
     if(typeof id !== 'undefined') {
+      if(conversationList.length === 0) {
+        fetchConversationList(true);
+      }
       fetchMessageList(id);
     }
 

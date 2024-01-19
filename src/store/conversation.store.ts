@@ -21,7 +21,7 @@ interface ConversationState {
     totalPage: number;
     totalCount: number;
   }) => void;
-  fetchConversationList: () => Promise<void>;
+  fetchConversationList: (isInit: boolean) => Promise<void>;
   createConversation: () => Promise<number>;
   deleteConversation: (conversationId: number | string) => Promise<void>;
   getTitle: (conversationId: number | string) => Promise<string>;
@@ -42,17 +42,38 @@ export const useConversationStore = create<ConversationState>((set, get) => ({
   setPagination: (val) => set(() => ({
     pagination: val,
   })),
-  fetchConversationList: async () => {
+  fetchConversationList: async (isInit: boolean = false) => {
+
     set({
       listLoading: true,
     });
-    const {page, count} = get().pagination;
-    const data = await ConversationService.getConversationList({page, count});
+    const { conversationList, pagination } = get();
+    const { page, count } = pagination;
+    let newPage = page;
+    let allConversations: Array<ConversationGetListItemResVO> = [];
+
+    let data = await ConversationService.getConversationList({page: newPage, count});
+    
+    if(isInit) {
+      // NOTE: 第一次全 Load
+      allConversations = data.conversations;
+      const { total_page } = data.page;
+      
+      for(let currentPage = newPage + 1; currentPage <= total_page; currentPage++) {
+        data = await ConversationService.getConversationList({page: currentPage, count});
+        allConversations = [...allConversations, ...data.conversations];
+      }
+      newPage = total_page;
+
+    } else {
+      allConversations = [...conversationList,...data.conversations];
+    }
+
     set({
-      conversationList: data.conversations,
+      conversationList: allConversations,
       listLoading: false,
       pagination: {
-        page,
+        page: newPage,
         count,
         totalCount: data.page.total_count,        
         totalPage: data.page.total_page,        
@@ -60,28 +81,49 @@ export const useConversationStore = create<ConversationState>((set, get) => ({
     });
   },
   createConversation: async (): Promise<number> => {
-    const {conversationList} = get();
+    const {conversationList, pagination, fetchConversationList} = get();
     const createConversationResult = await ConversationService.createConversation();
 
-    set({
-      conversationList: [...conversationList, {
-        ...createConversationResult,
-        title: null, // 先下 null
-      }],
-    });
+    let newConversationList = [...conversationList, {
+      ...createConversationResult,
+      title: null, // 先下 null
+    }];
+
+    if(newConversationList.length > pagination.totalCount) {
+      set({
+        conversationList: [{
+          ...createConversationResult,
+          title: null, // 先下 null
+        }, ...conversationList],
+        pagination: {
+          ...pagination,
+          totalCount: pagination.totalCount + 1,
+        },
+      });
+    } else {
+      await fetchConversationList(false);
+    }
 
     return createConversationResult.id;
   },
   deleteConversation: async (conversationId: number | string) => {
     await ConversationService.deleteConversation(+conversationId);
-    const {conversationList, pagination} = get();
-    set({
-      conversationList: conversationList.filter(item => `${item.id}` !== `${conversationId}`),
-      pagination: {
-        ...pagination,
-        totalCount: pagination.totalCount - 1,
-      },
-    });
+    const {conversationList, pagination, fetchConversationList} = get();
+
+    let newConversationList = conversationList.filter(item => `${item.id}` !== `${conversationId}`);
+    let newTotal = pagination.totalCount - 1;
+    if(newConversationList.length >= newTotal) {
+      set({
+        conversationList: newConversationList,
+        pagination: {
+          ...pagination,
+          totalCount: newTotal,
+        },
+      });
+    } else {
+      await fetchConversationList(false);
+    }
+
   },
   getTitle: async (conversationId: number | string) => {
     const result = await ConversationService.getTitle(+conversationId);

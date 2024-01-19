@@ -38,7 +38,7 @@ export function  ChatList() {
 
   useEffect(() => {
     if(conversationList.length === 0) {
-      fetchConversationList();
+      fetchConversationList(true);
     }
   }, []);
 

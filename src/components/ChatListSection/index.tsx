@@ -81,8 +81,7 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
   const handleScroll = async (evt) => {
     if(evt.currentTarget.scrollHeight - evt.currentTarget.scrollTop - 30 < (scrollRef.current as any).clientHeight) {
       if(hasMore) {
-        console.log('load');
-        // TODO: load 更多對話列表
+        // TODO: load 更多對話列表，目前第一次全 load ，暫時不需要所以
       }
     }
     

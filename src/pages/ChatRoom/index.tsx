@@ -22,7 +22,6 @@ export function  ChatRoom() {
 
   const { id } = useParams();
 
-  // TODO: 分頁
   const {
     conversationList,
     listLoading,

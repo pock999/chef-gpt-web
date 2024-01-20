@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-import { ChatListSection, EmptyChat } from '../../components';
+import { ChatListSection, EmptyChat } from '../../containers';
 
 import { useConversationStore } from '../../store';
 

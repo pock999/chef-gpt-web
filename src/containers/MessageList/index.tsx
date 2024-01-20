@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageListProps } from './message-list-props.model';
-import { Message } from '../Message';
 import {
   CircularProgress,
 } from '@mui/material';
+import { MessageUI } from '../../components/MessageUI';
 
 export function MessageList({messageList, responseProgress, hasMore, conversationId, fetchMore}: MessageListProps) {
   const [hasInit, setHasInit] = React.useState<boolean>(false);
@@ -55,12 +55,12 @@ export function MessageList({messageList, responseProgress, hasMore, conversatio
       
       {
         messageList.map(message => (
-          <Message {...message}/>
+          <MessageUI {...message}/>
         ))
       }
       {
         responseProgress &&
-        <Message
+        <MessageUI
           id={-1}
           content="AI 輸入中..."
           role="ai"

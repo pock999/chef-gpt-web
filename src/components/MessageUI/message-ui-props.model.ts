@@ -1,4 +1,4 @@
-export class MessageProps {
+export class MessageUIProps {
   id: number;
   content: string = '';
   backgroundColor?: string = '#dddddd';

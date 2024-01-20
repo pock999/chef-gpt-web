@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageProps } from './message-props.model';
+import { MessageUIProps } from './message-ui-props.model';
 import {
   Avatar,
   Typography,
@@ -7,14 +7,14 @@ import {
   CircularProgress
 } from '@mui/material';
 
-export function Message({
+export function MessageUI({
   id,
   content,
   backgroundColor,
   role,
   avartarImg,
   progress
-}: MessageProps) {
+}: MessageUIProps) {
   return (
     <div
       style={{

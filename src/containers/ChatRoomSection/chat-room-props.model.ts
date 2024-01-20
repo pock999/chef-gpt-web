@@ -1,4 +1,4 @@
-import { MessageProps } from "../Message/message-props.model";
+import { MessageProps } from "../../components/MessageUI/message-ui-props.model";
 
 export class ChatRoomProps {
   messageList: Array<MessageProps>;

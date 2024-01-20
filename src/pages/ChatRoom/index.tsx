@@ -11,7 +11,7 @@ import {
 import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { ChatListSection, ChatRoomSection, MessageList } from '../../components';
+import { ChatListSection, ChatRoomSection, MessageList } from '../../containers';
 import { useConversationStore, useMessageStore } from '../../store';
 import { useParams } from 'react-router-dom';
 

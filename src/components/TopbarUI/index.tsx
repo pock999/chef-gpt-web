@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import {
   AppBar,
   Toolbar,
@@ -8,22 +8,9 @@ import {
   Button,
 } from '@mui/material';
 
-import { CONFIG } from '../../config';
-import { AuthService } from '../../services';
-import { NavbarProps } from './navbar-props.model';
-// import logo from '../../logo.svg';
+import { TopbarUIProps } from './topbar-ui-props.model';
 
-export function Navbar({title}: NavbarProps) {
-
-  const isAuth = !!localStorage.getItem(CONFIG.tokenKey);
-
-  const navigate = useNavigate();
-
-  const logout = async () => {
-    await AuthService.logout();
-    navigate('/auth/login');
-  }
-
+export function TopbarUI({title, children}: TopbarUIProps) {
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: '#FFFFFF' }} elevation={4}>
@@ -71,10 +58,7 @@ export function Navbar({title}: NavbarProps) {
               }}
             >
               {
-                isAuth &&
-                <Button variant="outlined" onClick={() => logout()} style={{
-                  maxHeight: '70px',
-                }}>登出</Button>
+                children
               }
             </Grid>
           </Grid>

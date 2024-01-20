@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Outlet } from 'react-router-dom';
-import { Navbar } from '../../components';
+import { Navbar } from '../../containers';
 import {
   Container
 } from '@mui/material';

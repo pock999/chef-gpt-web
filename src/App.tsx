@@ -4,7 +4,7 @@ import './App.css'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { RoutesGuard, GuestGuard } from './shared'
 import { ChatRoom, ChatList, Login, Register, NotFound } from './pages'
-import { Navbar } from './components'
+import { Navbar } from './containers'
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import { AppLayout, AuthLayout } from './layouts'

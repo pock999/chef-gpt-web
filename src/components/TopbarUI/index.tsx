@@ -9,11 +9,12 @@ import {
 } from '@mui/material';
 
 import { TopbarUIProps } from './topbar-ui-props.model';
+import { COLOR } from '../../config';
 
 export function TopbarUI({title, children}: TopbarUIProps) {
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: '#FFFFFF' }} elevation={4}>
+      <AppBar position="static" sx={{ backgroundColor: COLOR.grayScale[0] }} elevation={4}>
         <Toolbar variant="dense">
           <Grid container spacing={1}>
             <Grid
@@ -40,7 +41,7 @@ export function TopbarUI({title, children}: TopbarUIProps) {
                   mr: 2,
                   fontWeight: 700,
                   letterSpacing: '.1rem',
-                  color: '#010101',
+                  color: COLOR.grayScale[980],
                   textDecoration: 'none',
                   lineHeight: '80px'
                 }}

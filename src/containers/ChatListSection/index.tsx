@@ -29,6 +29,7 @@ import dayjs from 'dayjs';
 
 import { ChatListProps } from './chat-list-props.model';
 import { useConversationStore } from '../../store';
+import { Snackbar } from '../../shared';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -68,6 +69,7 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
       await deleteConversation(currentConversationId);
 
       setCurrentConversationId(0);
+      Snackbar.success('刪除成功');
     }
     handleClose();
   };

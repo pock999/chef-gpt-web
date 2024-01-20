@@ -109,7 +109,9 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
       </Dialog>
       <div
         style={{
-          overflow: 'auto', maxHeight: 'calc(100vh - 110px)'
+          overflow: 'auto',
+          maxHeight: 'calc(100vh - 110px)',
+          width: '100%',
         }}
         ref={scrollRef}
         onScroll={handleScroll}

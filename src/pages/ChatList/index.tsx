@@ -64,9 +64,9 @@ export function  ChatList() {
             listLoading
             ?
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Skeleton variant="rounded" animation="wave" width={280} height={60}  />
-                <Skeleton variant="rounded" animation="wave" width={280} height={60} sx={{ mt: 1}} />
-                <Skeleton variant="rounded" animation="wave" width={280} height={60} sx={{ mt: 1}} />
+                <Skeleton variant="rounded" animation="wave" width={300} height={60}  />
+                <Skeleton variant="rounded" animation="wave" width={300} height={60} sx={{ mt: 1}} />
+                <Skeleton variant="rounded" animation="wave" width={300} height={60} sx={{ mt: 1}} />
               </div>
             :
             <>

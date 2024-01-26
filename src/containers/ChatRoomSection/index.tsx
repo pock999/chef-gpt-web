@@ -1,18 +1,36 @@
 import { Grid, Button, TextField, useTheme, useMediaQuery, Paper } from '@mui/material';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { MessageList } from '../MessageList';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import { ChatRoomProps } from './chat-room-props.model';
 
-export function ChatRoomSection({ messageList, loading, sendMessage, hasMore, conversationId, fetchMore }: ChatRoomProps) {
+export function ChatRoomSection({
+  messageList,
+  loading,
+  sendMessage,
+  hasMore,
+  conversationId,
+  fetchMore
+}: ChatRoomProps) {
 
   const [inputText, setInputText] = useState<string>('');
   const [aiLoading, setAiLoading] = useState<boolean>(false);
 
+  const  [queryParams, setQueryParams] = useSearchParams(); 
+
   const theme = useTheme();
   const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
+
+  useEffect(() => {
+    if(!!queryParams.get('firstInput')) {
+      setInputText(queryParams.get('firstInput') as string);
+
+      queryParams.delete('firstInput');
+      setQueryParams(queryParams);
+    }
+  }, []);
 
   const enterInput = async () => {
     setAiLoading(true);

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import {
-  Link, useNavigate,
+  Link, useNavigate, useParams,
 } from 'react-router-dom';
 import {
   List,
@@ -43,7 +43,9 @@ const Transition = React.forwardRef(function Transition(
 export function ChatListSection({ chatList, selected, showAddButton, hasMore }: ChatListProps) {
   const [openConfirm, setOpenConfrim] = React.useState<boolean>(false);
   const [currentConversationId, setCurrentConversationId] = React.useState<number>(0);
+  
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const {
     createConversation,
@@ -67,6 +69,10 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
   const deleteChat = async () => {
     if(currentConversationId !== 0) {
       await deleteConversation(currentConversationId);
+
+      if(`${id}` === `${currentConversationId}`) {
+        navigate(`/app/chat`);
+      }
 
       setCurrentConversationId(0);
       Snackbar.success('刪除成功');

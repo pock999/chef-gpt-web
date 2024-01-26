@@ -98,6 +98,12 @@ export function ChatRoomSection({
               height: '100%'
             }}
             value={inputText}
+            onKeyDown={(evt) => {
+              if(evt.key === 'Enter' && !evt.shiftKey) {
+                evt.preventDefault();
+                enterInput();
+              }
+            }}
             onChange={(evt) => setInputText(evt.target.value)}
           />
           <Button

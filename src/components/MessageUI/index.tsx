@@ -36,7 +36,7 @@ export function MessageUI({
           display: 'flex',
         }}
       >
-        <Typography variant="body1">{content}</Typography>
+        <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>{content}</Typography>
         {
           progress && <CircularProgress size={20} />
         }

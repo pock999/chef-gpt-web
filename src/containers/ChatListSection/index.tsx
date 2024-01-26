@@ -145,7 +145,7 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
                     <Avatar alt={chatItem.altString} src={chatItem.avatarImg} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={chatItem.title}
+                    primary={(chatItem.title === null || chatItem.title === '' || chatItem.title == undefined) ? '未命名的對話' : chatItem.title}
                     secondary={
                       <React.Fragment>
                         <Typography

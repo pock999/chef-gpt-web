@@ -96,7 +96,7 @@ export function Login() {
           variant="elevation"
           sx={{
             p: 3,
-            pt: 8,
+            pt: 6,
             pb: 4,
             m: 0.5,
           }}
@@ -105,7 +105,7 @@ export function Login() {
           {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.primary' }}>
             <AccountCircleIcon />
           </Avatar> */}
-          <Typography component="h1" variant="h4" sx={{ textAlign: 'center' }}>
+          <Typography component="h1" variant="h4" sx={{ textAlign: 'center', mb: 4 }}>
             Chef-GPT
           </Typography>
           <Typography component="h2" variant="h5">

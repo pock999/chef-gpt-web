@@ -22,7 +22,9 @@ export function MessageUI({
         display: 'flex',
         flexDirection: role === 'user' ? 'row-reverse' : 'row',
         justifyContent: 'flex-start',
-        marginBottom: '0.5rem'
+        marginBottom: '0.5rem',
+        paddingLeft: role === 'ai' ? '0.75rem' : 0,
+        paddingRight: role === 'user' ? '1rem' : 0,
       }}
       key={id}
     >
@@ -34,6 +36,7 @@ export function MessageUI({
           backgroundColor,
           m: 0.5,
           display: 'flex',
+          borderRadius: '0.75rem'
         }}
       >
         <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>{content}</Typography>

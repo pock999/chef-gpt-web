@@ -110,12 +110,12 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
         <DialogTitle>{"確定要刪除此對話"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            不考慮下嗎？哥
+            不再考慮下嗎？哥
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>取消</Button>
-          <Button onClick={() => deleteChat()}>確認</Button>
+          <Button onClick={() => deleteChat()}>刪除</Button>
         </DialogActions>
       </Dialog>
       <div

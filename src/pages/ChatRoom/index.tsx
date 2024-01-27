@@ -124,7 +124,7 @@ export function  ChatRoom() {
             }
             {
               matchmdUp &&
-              <Divider sx={{ marginLeft: '1rem' }} orientation="vertical" variant="middle" flexItem />
+              <Divider orientation="vertical" variant="middle" flexItem />
             }
           </Grid>
         }

@@ -17,7 +17,7 @@ export function TopbarUI({title, children}: TopbarUIProps) {
       <AppBar position="static" sx={{ backgroundColor: COLOR.grayScale[0] }} elevation={4}>
         <Toolbar variant="dense">
           <Grid container spacing={1}>
-            <Grid
+            {/* <Grid
               item
               xs={2}
               sm={1}
@@ -27,7 +27,7 @@ export function TopbarUI({title, children}: TopbarUIProps) {
               }}
             >
               <img src="https://influencermarketinghub.com/wp-content/uploads/2023/02/chatgpt-logo-02AFA704B5-seeklogo.com_.png" className="App-logo" alt="logo" style={{ width: '80px', height: 'auto' }} />
-            </Grid> 
+            </Grid>  */}
             <Grid item xs={8} sm={10} sx={{
               display: 'flex',
               alignContent: 'center'

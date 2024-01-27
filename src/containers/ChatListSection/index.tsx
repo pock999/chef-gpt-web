@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Link, useNavigate, useParams,
 } from 'react-router-dom';
@@ -19,7 +19,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  CircularProgress
+  CircularProgress,
+  Tooltip
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
@@ -46,6 +47,8 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
   
   const navigate = useNavigate();
   const { id } = useParams();
+  const [focusId, setFocusId] = useState<null | number>(null);
+
 
   const {
     createConversation,
@@ -127,49 +130,53 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
         <List sx={{ width: '100%', bgcolor: 'background.paper', height: '100%', }}>
           {
             showAddButton &&
-            <ListItemButton
-              alignItems="center"
-              onClick={() => startConversation()}
-            >
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
-              <ListItemText primary="開始新對話" />
-            </ListItemButton>
+            <>
+              <ListItemButton
+                alignItems="center"
+                onClick={() => startConversation()}
+                sx={{ pt: '0.675rem', pb: '0.675rem' }}
+              >
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="開始新對話" />
+              </ListItemButton>
+              <Divider variant="inset" component="li" sx={{ width: '100%', ml: '-0.875rem' }} />
+            </>
           }
           {
             chatList.map(chatItem => (
               <>
                 <ListItemButton
-                  alignItems="flex-start"
+                  alignItems="center"
                   selected={!!selected ? `${selected}`===`${chatItem.id}` : false}
                   key={chatItem.id}
                   component={Link}
                   to={`/app/chat/${chatItem.id}`}
+                  sx={{ pt: '0.675rem', pb: '0.675rem' }}
+                  onMouseEnter={() => setFocusId(chatItem.id)}
+                  onMouseLeave={() => setFocusId(null)}
                 >
                   <ListItemAvatar>
                     <Avatar alt={chatItem.altString} src={chatItem.avatarImg} />
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={(chatItem.title === null || chatItem.title === '' || chatItem.title == undefined) ? '未命名的對話' : chatItem.title}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          sx={{ display: 'inline' }}
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          { dayjs(chatItem.create_time).format('YYYY-MM-DD HH:mm:ss') }
-                        </Typography>
-                      </React.Fragment>
-                    }
-                  />
-                  <IconButton aria-label="delete" onClick={(evt) => deleteConfirm(evt, chatItem.id)}>
-                    <CloseIcon/>
-                  </IconButton>
+                  <Tooltip title={dayjs(chatItem.create_time).format('YYYY-MM-DD HH:mm:ss')}>
+                    <ListItemText
+                      primary={(chatItem.title === null || chatItem.title === '' || chatItem.title == undefined) ? '未命名的對話' : chatItem.title}
+                    />
+                  </Tooltip>
+                  {
+                  focusId === chatItem.id && 
+                    <IconButton
+                      aria-label="delete"
+                      onClick={(evt) => deleteConfirm(evt, chatItem.id)}
+                    >
+                      <CloseIcon/>
+                    </IconButton>
+                  }
+                  
                 </ListItemButton>
-                <Divider variant="inset" component="li" />
+                <Divider variant="inset" component="li" sx={{ width: '100%', ml: '-0.875rem' }} />
               </>
             ))
           }

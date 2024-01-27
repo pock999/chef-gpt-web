@@ -73,7 +73,7 @@ export function  ChatList() {
               <ChatListSection
                 selected={null}
                 chatList={conversationList}
-                showAddButton={false}
+                showAddButton={true}
                 hasMore={pagination.totalCount > conversationList.length}
               />
               {
@@ -97,7 +97,7 @@ export function  ChatList() {
           }
           {
             matchmdUp &&
-            <Divider sx={{ marginLeft: '1rem' }} orientation="vertical" variant="middle" flexItem />
+            <Divider orientation="vertical" variant="middle" flexItem />
           }
         </Grid>
         {

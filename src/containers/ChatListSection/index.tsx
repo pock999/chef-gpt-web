@@ -20,7 +20,9 @@ import {
   DialogContentText,
   DialogActions,
   CircularProgress,
-  Tooltip
+  Tooltip,
+  useMediaQuery,
+  useTheme
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
@@ -99,6 +101,17 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
     
   }
 
+  const theme = useTheme();
+  const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
+  
+
+  // const bindLongPress = useLongPress((id) => {
+  //   if(!matchmdUp) {
+  //     alert(`Long pressed! ${id}`);
+  //   }
+
+  // });
+
   return (
     <>
       <Dialog
@@ -166,8 +179,14 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
                     pb: '0.675rem',
                     borderBottom: '1px solid #E0E0E0'
                   }}
-                  onMouseEnter={() => setFocusId(chatItem.id)}
-                  onMouseLeave={() => setFocusId(null)}
+                  onMouseEnter={() => {
+                    if(matchmdUp) {
+                      setFocusId(chatItem.id)
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    setFocusId(null);
+                  }}
                 >
                   <ListItemAvatar>
                     <Avatar alt={chatItem.altString} src={chatItem.avatarImg} />

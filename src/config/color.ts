@@ -4,6 +4,7 @@ export const COLOR = {
   },
   grayScale: {
     0: '#ffffff',
+    100: '#f9f9f9',
     400: '#757575',
     700: '#dddddd',
     800: '#E0E0E0',

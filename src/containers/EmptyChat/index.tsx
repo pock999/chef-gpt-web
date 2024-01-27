@@ -76,10 +76,11 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
             >
               <Box
                 sx={{
-                  backgroundColor: COLOR.grayScale[800],
-                  borderRadius: '1.25rem',
+                  backgroundColor: COLOR.grayScale[100],
                   flex: 1,
                   padding: '1rem',
+                  boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                  cursor: 'pointer',
                 }}
                 onClick={() => startConversation('給我青椒炒肉絲食譜')}
               >
@@ -87,10 +88,11 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
               </Box>
               <Box
                 sx={{
-                  backgroundColor: COLOR.grayScale[800],
-                  borderRadius: '1.25rem',
+                  backgroundColor: COLOR.grayScale[100],
                   flex: 1,
                   padding: '1rem',
+                  boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                  cursor: 'pointer',
                 }}
                 onClick={() => startConversation('給我墨西哥捲餅食譜')}
               >
@@ -98,10 +100,11 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
               </Box>
               <Box
                 sx={{
-                  backgroundColor: COLOR.grayScale[800],
-                  borderRadius: '1.25rem',
+                  backgroundColor: COLOR.grayScale[100],
                   flex: 1,
                   padding: '1rem',
+                  boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                  cursor: 'pointer',
                 }}
                 onClick={() => startConversation('給我青醬義大利麵食譜')}
               >
@@ -109,14 +112,14 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
               </Box>
             </Grid>
 
-            <Button
+            {/* <Button
               variant="contained"
               sx={{ width: '120px', height: '40px', fontSize: '18px'}}
               disabled={disabled}
               onClick={() => startConversation()}
             >
               開始聊天
-            </Button>
+            </Button> */}
           </Box>
         </Grid>
         <Grid

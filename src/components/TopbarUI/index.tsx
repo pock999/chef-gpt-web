@@ -51,11 +51,12 @@ export function TopbarUI({title, children}: TopbarUIProps) {
             </Grid>
             <Grid
               item
-              xs={2}
-              sm={1}
+              xs={4}
+              sm={2}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'flex-end'
               }}
             >
               {

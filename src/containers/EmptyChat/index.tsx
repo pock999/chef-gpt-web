@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   useNavigate,
 } from 'react-router-dom';
@@ -17,6 +17,7 @@ import { COLOR } from '../../config';
 export function EmptyChat({ disabled }: {disabled: boolean}) {
   const navigate = useNavigate();
 
+  const [inputText, setInputText] = useState<string>('');
   const {
     createConversation
   } = useConversationStore((state) => ({ 
@@ -134,11 +135,34 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
             pl: '1rem',
           }}
         >
-          <TextField id="outlined-basic" variant="outlined" multiline maxRows={1} label="" sx={{
-            width: 'calc(99% - 88px)',
-            height: '100%'
-          }} disabled />
-          <Button variant="contained" sx={{ width: '80px', marginLeft: '0.5rem', paddingTop: '1rem', paddingBottom: '1rem' }} disabled>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            multiline
+            maxRows={1}
+            label=""
+            sx={{
+              width: 'calc(99% - 88px)',
+              height: '20px'
+            }}
+            onKeyDown={(evt) => {
+              if(evt.key === 'Enter' && !evt.shiftKey) {
+                evt.preventDefault();
+                startConversation(inputText)
+              }
+            }}
+            onChange={(evt) => setInputText(evt.target.value)}
+          />
+          <Button
+            variant="contained"
+            sx={{
+              width: '80px',
+              marginLeft: '0.5rem',
+              paddingTop: '1rem',
+              paddingBottom: '1rem'
+            }}
+            onClick={() => startConversation(inputText)}
+          >
             <SendIcon></SendIcon>
           </Button>
         </Box>

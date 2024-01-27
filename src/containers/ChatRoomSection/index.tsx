@@ -25,17 +25,23 @@ export function ChatRoomSection({
 
   useEffect(() => {
     if(!!queryParams.get('firstInput')) {
-      setInputText(queryParams.get('firstInput') as string);
+      const text = queryParams.get('firstInput') as string;
 
       queryParams.delete('firstInput');
       setQueryParams(queryParams);
+
+      enterInput(text);
     }
   }, []);
 
-  const enterInput = async () => {
+  const enterInput = async (text?: string) => {
     setAiLoading(true);
+    let input = inputText;
+    if(!!text) {
+      input = text;
+    }
     setInputText('');
-    await sendMessage(inputText);
+    await sendMessage(input);
     setAiLoading(false);
   };
 

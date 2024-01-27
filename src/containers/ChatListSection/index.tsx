@@ -31,6 +31,7 @@ import dayjs from 'dayjs';
 import { ChatListProps } from './chat-list-props.model';
 import { useConversationStore } from '../../store';
 import { Snackbar } from '../../shared';
+import { COLOR } from '../../config';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -134,14 +135,21 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
               <ListItemButton
                 alignItems="center"
                 onClick={() => startConversation()}
-                sx={{ pt: '0.675rem', pb: '0.675rem' }}
+                sx={{
+                  pt: '0.675rem',
+                  pb: '0.675rem',
+                  position: 'sticky',
+                  top: -1,
+                  background: COLOR.grayScale[0],
+                  zIndex: 1,
+                  borderBottom: '1px solid #E0E0E0'
+                }}
               >
                 <ListItemIcon>
                   <AddIcon />
                 </ListItemIcon>
                 <ListItemText primary="開始新對話" />
               </ListItemButton>
-              <Divider variant="inset" component="li" sx={{ width: '100%', ml: '-0.875rem' }} />
             </>
           }
           {
@@ -153,7 +161,11 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
                   key={chatItem.id}
                   component={Link}
                   to={`/app/chat/${chatItem.id}`}
-                  sx={{ pt: '0.675rem', pb: '0.675rem' }}
+                  sx={{
+                    pt: '0.675rem',
+                    pb: '0.675rem',
+                    borderBottom: '1px solid #E0E0E0'
+                  }}
                   onMouseEnter={() => setFocusId(chatItem.id)}
                   onMouseLeave={() => setFocusId(null)}
                 >
@@ -176,7 +188,7 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
                   }
                   
                 </ListItemButton>
-                <Divider variant="inset" component="li" sx={{ width: '100%', ml: '-0.875rem' }} />
+                {/* <Divider variant="inset" component="li" sx={{ width: '100%', ml: '-0.875rem' }} /> */}
               </>
             ))
           }

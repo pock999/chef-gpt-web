@@ -63,7 +63,7 @@ export function ChatRoomSection({
             width: '100%',
           }}
         >
-          {
+          {/* {
             !matchmdUp &&
             <Link to="/app/chat">
               <Button variant="contained" sx={{
@@ -78,7 +78,7 @@ export function ChatRoomSection({
                 <ArrowBackIcon/>
               </Button>
             </Link>
-          }
+          } */}
           
           <MessageList
             messageList={messageList}

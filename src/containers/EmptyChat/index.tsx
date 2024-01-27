@@ -62,6 +62,9 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
             </Typography>
             <Typography
               variant="h6" gutterBottom
+              sx={{
+                fontWeight: 300
+              }}
             >
               是否空虛寂寞又覺得餓? 兄弟 你想不想試試看以下的菜?
             </Typography>

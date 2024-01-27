@@ -13,7 +13,7 @@ export function AppLayout() {
       <Container maxWidth={false} style={{
         padding: 0,
         paddingTop: '1rem',
-        height: 'calc(100% - 87px)',
+        height: 'calc(100% - 80px)',
       }}>
         <Outlet/>
       </Container>

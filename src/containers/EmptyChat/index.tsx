@@ -33,17 +33,15 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
 
   return (
     <>
-      <Grid container spacing={1} sx={{ height: '100%', display: 'flex' }}>
-        <Grid
-          item
-          xs={12}
+      <Grid container spacing={1} sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+        <Box
           sx={{
-            height: 'calc(100% - 120px)',
+            height: 'calc(100% - 60px)',
             width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
           }}
         >
           <Box
@@ -53,6 +51,7 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
+              pl: '2rem'
             }}
           >
             <Typography
@@ -124,27 +123,25 @@ export function EmptyChat({ disabled }: {disabled: boolean}) {
               開始聊天
             </Button> */}
           </Box>
-        </Grid>
-        <Grid
-          item
-          xs={12}
+        </Box>
+        <Box
           sx={{
-            height: '80px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'flex-start',
             flexDirection: 'row',
-            borderTop: '1px solid #E0E0E0'
+            height: '60px',
+            pl: '1rem',
           }}
         >
-          <TextField id="outlined-basic" variant="outlined" multiline maxRows={3} label="" sx={{
+          <TextField id="outlined-basic" variant="outlined" multiline maxRows={1} label="" sx={{
             width: 'calc(99% - 88px)',
             height: '100%'
           }} disabled />
           <Button variant="contained" sx={{ width: '80px', marginLeft: '0.5rem', paddingTop: '1rem', paddingBottom: '1rem' }} disabled>
             <SendIcon></SendIcon>
           </Button>
-        </Grid>
+        </Box>
       </Grid>
     </>
   );

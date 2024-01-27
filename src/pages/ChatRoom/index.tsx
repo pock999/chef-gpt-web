@@ -74,7 +74,7 @@ export function  ChatRoom() {
   
   return (
     <>
-      <Grid container spacing={1} sx={{ height: '100%' }}>
+      <Grid container sx={{ height: '100%' }}>
         {
           matchmdUp &&
           <Grid

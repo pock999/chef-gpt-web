@@ -40,7 +40,7 @@ export function MessageList({messageList, responseProgress, hasMore, conversatio
       style={{
         flex: 1,
         paddingBottom: '2rem',
-        height: 'calc(100vh - 250px)',
+        height: 'calc(100vh - 190px)',
         width: '100%',
         overflow: 'auto'
       }}

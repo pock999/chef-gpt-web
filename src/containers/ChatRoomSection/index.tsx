@@ -1,4 +1,4 @@
-import { Grid, Button, TextField, useTheme, useMediaQuery, Paper } from '@mui/material';
+import { Grid, Button, TextField, useTheme, useMediaQuery, Paper, Box } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { MessageList } from '../MessageList';
@@ -41,12 +41,19 @@ export function ChatRoomSection({
 
   return (
     <>
-      <Grid container spacing={1} sx={{ height: '100%', display: 'flex' }}>
-        <Grid
-          item
-          xs={12}
+      <Grid
+        container
+        spacing={1}
+        sx={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+
+        <Box
           sx={{
-            height: 'calc(100% - 120px)',
+            height: 'calc(100% - 60px)',
             width: '100%',
           }}
         >
@@ -74,28 +81,26 @@ export function ChatRoomSection({
             conversationId={conversationId}
             fetchMore={fetchMore}
           />
-        </Grid>
-        <Grid
-          item
-          xs={12}
+        </Box>
+        <Box
           sx={{
-            height: '80px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'flex-start',
             flexDirection: 'row',
-            borderTop: '1px solid #E0E0E0'
+            height: '60px',
+            pl: '1rem',
           }}
         >
           <TextField
             id="outlined-basic"
             variant="outlined"
             multiline
-            maxRows={3}
+            maxRows={1}
             label=""
             sx={{
               width: 'calc(99% - 88px)',
-              height: '100%'
+              height: '20px'
             }}
             value={inputText}
             onKeyDown={(evt) => {
@@ -119,7 +124,7 @@ export function ChatRoomSection({
           >
             <SendIcon></SendIcon>
           </Button>
-        </Grid>
+        </Box>
       </Grid>
     </>
   );

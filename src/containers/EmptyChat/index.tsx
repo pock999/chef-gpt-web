@@ -135,7 +135,7 @@ export function EmptyChat({ disabled }: { disabled: boolean }) {
             label=""
             size="small"
             sx={{
-              width: "calc(99% - 88px)",
+              width: "calc(99% - 98px)",
               height: "30px",
             }}
             inputProps={{
@@ -156,7 +156,7 @@ export function EmptyChat({ disabled }: { disabled: boolean }) {
           <Button
             variant="contained"
             sx={{
-              width: "80px",
+              width: "90px",
               marginLeft: "0.5rem",
               paddingTop: "0.75rem",
               paddingBottom: "0.75rem",

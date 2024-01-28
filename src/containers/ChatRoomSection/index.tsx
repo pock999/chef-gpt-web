@@ -112,7 +112,7 @@ export function ChatRoomSection({
             size="small"
             label=""
             sx={{
-              width: "calc(99% - 88px)",
+              width: "calc(99% - 98px)",
               height: "20px",
             }}
             inputProps={{
@@ -134,7 +134,7 @@ export function ChatRoomSection({
           <Button
             variant="contained"
             sx={{
-              width: "80px",
+              width: "88px",
               marginLeft: "0.5rem",
               paddingTop: "0.75rem",
               paddingBottom: "0.75rem",

@@ -11,6 +11,8 @@ export function MessageList({messageList, responseProgress, hasMore, conversatio
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
+    documentHeight();
+
     // 滾到最下面
     (messagesEndRef.current as any)?.scrollIntoView({ behavior: "smooth" });
 
@@ -35,12 +37,19 @@ export function MessageList({messageList, responseProgress, hasMore, conversatio
     }
   };
 
+  const [innerH, setInnerH] = useState('100vh');
+  const documentHeight = () => {
+    setInnerH(`${window.innerHeight}px`);
+  };
+
+  window.addEventListener('resize', documentHeight);
+
   return (
     <div
       style={{
         flex: 1,
         paddingBottom: '2rem',
-        height: 'calc(100vh - 190px)',
+        height: `calc(${innerH} - 190px)`,
         width: '100%',
         overflow: 'auto'
       }}

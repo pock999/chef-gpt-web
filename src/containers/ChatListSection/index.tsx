@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   Link, useNavigate, useParams,
 } from 'react-router-dom';
@@ -79,6 +79,10 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
     setOpenConfrim(true);
   };
 
+  useEffect(() => {
+    documentHeight();
+  }, []);
+
   const deleteChat = async () => {
     if(currentConversationId !== 0) {
       await deleteConversation(currentConversationId);
@@ -142,6 +146,13 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
 
   // });
 
+  const [innerH, setInnerH] = useState('100vh');
+  const documentHeight = () => {
+    setInnerH(`${window.innerHeight}px`);
+  };
+
+  window.addEventListener('resize', documentHeight);
+
   return (
     <>
       <Dialog
@@ -165,7 +176,7 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
       <div
         style={{
           overflow: 'auto',
-          maxHeight: 'calc(100vh - 110px)',
+          maxHeight: `calc(${innerH} - 110px)`,
           width: '100%',
         }}
         ref={scrollRef}

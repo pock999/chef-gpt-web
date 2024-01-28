@@ -173,7 +173,7 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
       >
         <List sx={{ width: '100%', bgcolor: 'background.paper', height: '100%', }}>
           {
-            showAddButton &&
+            showAddButton && matchmdUp &&
             <>
               <ListItemButton
                 alignItems="center"
@@ -253,7 +253,7 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
                     // }}
                   >
                       <MenuItem  onClick={(evt) => deleteConfirm(evt, chatItem.id)}>
-                        刪除 { chatItem.id }
+                        刪除
                       </MenuItem>
                   </Menu>
 

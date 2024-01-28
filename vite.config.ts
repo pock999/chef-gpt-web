@@ -36,4 +36,7 @@ export default defineConfig({
         include: ['@emotion/styled', '@emotion/react', '@mui/material'],
     },
     plugins: [react(), tsconfigPaths(), svgr()],
+    server: {
+        host: true
+    }
 });

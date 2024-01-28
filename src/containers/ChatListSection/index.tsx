@@ -22,12 +22,15 @@ import {
   CircularProgress,
   Tooltip,
   useMediaQuery,
-  useTheme
+  useTheme,
+  Menu,
+  MenuItem
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import LoopIcon from '@mui/icons-material/Loop';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import dayjs from 'dayjs';
 
 import { ChatListProps } from './chat-list-props.model';
@@ -68,6 +71,10 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
 
   const deleteConfirm = async (evt, chatId: number) => {
     evt.preventDefault();
+    setAnchorEl({
+      element: null,
+      id: 0,
+    });
     setCurrentConversationId(chatId);
     setOpenConfrim(true);
   };
@@ -104,6 +111,29 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
   const theme = useTheme();
   const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
   
+
+  const [anchorEl, setAnchorEl] = React.useState<{
+    element: null | HTMLElement;
+    id: number;
+  }>({
+    element: null,
+    id: 0,
+  });
+  const open = Boolean(anchorEl.element);
+  const openDrop = (event: React.MouseEvent<HTMLElement>, chatId: number) => {
+    event.preventDefault();
+    setAnchorEl({
+      element: event.currentTarget,
+      id: chatId
+    });
+  };
+  const handleCloseDrop = (evt) => {
+    evt.preventDefault();
+    setAnchorEl({
+      element: null,
+      id: 0,
+    });
+  };
 
   // const bindLongPress = useLongPress((id) => {
   //   if(!matchmdUp) {
@@ -179,14 +209,14 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
                     pb: '0.675rem',
                     borderBottom: '1px solid #E0E0E0'
                   }}
-                  onMouseEnter={() => {
-                    if(matchmdUp) {
-                      setFocusId(chatItem.id)
-                    }
-                  }}
-                  onMouseLeave={() => {
-                    setFocusId(null);
-                  }}
+                  // onMouseEnter={() => {
+                  //   if(matchmdUp) {
+                  //     setFocusId(chatItem.id)
+                  //   }
+                  // }}
+                  // onMouseLeave={() => {
+                  //   setFocusId(null);
+                  // }}
                 >
                   <ListItemAvatar>
                     <Avatar alt={chatItem.altString} src={chatItem.avatarImg} />
@@ -196,7 +226,38 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
                       primary={(chatItem.title === null || chatItem.title === '' || chatItem.title == undefined) ? '未命名的對話' : chatItem.title}
                     />
                   </Tooltip>
-                  {
+
+                  <IconButton
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls={open ? 'long-menu' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={(evt) => openDrop(evt, chatItem.id)}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                      'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={anchorEl.element}
+                    open={open && anchorEl.id === chatItem.id}
+                    onClose={handleCloseDrop}
+                    // PaperProps={{
+                    //   style: {
+                    //     maxHeight: ITEM_HEIGHT * 4.5,
+                    //     width: '20ch',
+                    //   },
+                    // }}
+                  >
+                      <MenuItem  onClick={(evt) => deleteConfirm(evt, chatItem.id)}>
+                        刪除 { chatItem.id }
+                      </MenuItem>
+                  </Menu>
+
+                  {/* {
                   focusId === chatItem.id && 
                     <IconButton
                       aria-label="delete"
@@ -204,7 +265,7 @@ export function ChatListSection({ chatList, selected, showAddButton, hasMore }: 
                     >
                       <CloseIcon/>
                     </IconButton>
-                  }
+                  } */}
                   
                 </ListItemButton>
                 {/* <Divider variant="inset" component="li" sx={{ width: '100%', ml: '-0.875rem' }} /> */}

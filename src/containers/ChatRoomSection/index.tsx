@@ -1,10 +1,18 @@
-import { Grid, Button, TextField, useTheme, useMediaQuery, Paper, Box } from '@mui/material';
-import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { MessageList } from '../MessageList';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import SendIcon from '@mui/icons-material/Send';
-import { ChatRoomProps } from './chat-room-props.model';
+import {
+  Grid,
+  Button,
+  TextField,
+  useTheme,
+  useMediaQuery,
+  Paper,
+  Box,
+} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { MessageList } from "../MessageList";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import SendIcon from "@mui/icons-material/Send";
+import { ChatRoomProps } from "./chat-room-props.model";
 
 export function ChatRoomSection({
   messageList,
@@ -12,22 +20,21 @@ export function ChatRoomSection({
   sendMessage,
   hasMore,
   conversationId,
-  fetchMore
+  fetchMore,
 }: ChatRoomProps) {
-
-  const [inputText, setInputText] = useState<string>('');
+  const [inputText, setInputText] = useState<string>("");
   const [aiLoading, setAiLoading] = useState<boolean>(false);
 
-  const  [queryParams, setQueryParams] = useSearchParams(); 
+  const [queryParams, setQueryParams] = useSearchParams();
 
   const theme = useTheme();
-  const matchmdUp = useMediaQuery(theme.breakpoints.up('md'));
+  const matchmdUp = useMediaQuery(theme.breakpoints.up("md"));
 
   useEffect(() => {
-    if(!!queryParams.get('firstInput')) {
-      const text = queryParams.get('firstInput') as string;
+    if (!!queryParams.get("firstInput")) {
+      const text = queryParams.get("firstInput") as string;
 
-      queryParams.delete('firstInput');
+      queryParams.delete("firstInput");
       setQueryParams(queryParams);
 
       enterInput(text);
@@ -37,10 +44,10 @@ export function ChatRoomSection({
   const enterInput = async (text?: string) => {
     setAiLoading(true);
     let input = inputText;
-    if(!!text) {
+    if (!!text) {
       input = text;
     }
-    setInputText('');
+    setInputText("");
     await sendMessage(input);
     setAiLoading(false);
   };
@@ -51,16 +58,15 @@ export function ChatRoomSection({
         container
         spacing={1}
         sx={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-
         <Box
           sx={{
-            height: 'calc(100% - 60px)',
-            width: '100%',
+            height: "calc(100% - 45px)",
+            width: "100%",
           }}
         >
           {/* {
@@ -79,7 +85,7 @@ export function ChatRoomSection({
               </Button>
             </Link>
           } */}
-          
+
           <MessageList
             messageList={messageList}
             responseProgress={aiLoading}
@@ -90,12 +96,12 @@ export function ChatRoomSection({
         </Box>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-            flexDirection: 'row',
-            height: '60px',
-            pl: '1rem',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            flexDirection: "row",
+            height: "30px",
+            pl: "1rem",
           }}
         >
           <TextField
@@ -103,14 +109,22 @@ export function ChatRoomSection({
             variant="outlined"
             multiline
             maxRows={1}
+            size="small"
             label=""
             sx={{
-              width: 'calc(99% - 88px)',
-              height: '20px'
+              width: "calc(99% - 88px)",
+              height: "20px",
+            }}
+            inputProps={{
+              style: {
+                height: "26px",
+                fontSize: "20px",
+                paddingTop: "0.25rem",
+              },
             }}
             value={inputText}
             onKeyDown={(evt) => {
-              if(evt.key === 'Enter' && !evt.shiftKey) {
+              if (evt.key === "Enter" && !evt.shiftKey) {
                 evt.preventDefault();
                 enterInput();
               }
@@ -120,11 +134,12 @@ export function ChatRoomSection({
           <Button
             variant="contained"
             sx={{
-              width: '80px',
-              marginLeft: '0.5rem',
-              paddingTop: '1rem',
-              paddingBottom: '1rem',
+              width: "80px",
+              marginLeft: "0.5rem",
+              paddingTop: "0.75rem",
+              paddingBottom: "0.75rem",
             }}
+            size="small"
             disabled={!inputText}
             onClick={() => enterInput()}
           >

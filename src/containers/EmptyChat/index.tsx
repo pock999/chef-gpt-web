@@ -34,7 +34,7 @@ export function EmptyChat({ disabled }: { disabled: boolean }) {
       >
         <Box
           sx={{
-            height: "calc(100% - 45px)",
+            height: "calc(100% - 42px)",
             width: "100%",
           }}
         >
@@ -140,7 +140,7 @@ export function EmptyChat({ disabled }: { disabled: boolean }) {
             }}
             inputProps={{
               style: {
-                height: "26px",
+                height: "24px",
                 fontSize: "20px",
                 paddingTop: "0.25rem",
               },
@@ -158,8 +158,8 @@ export function EmptyChat({ disabled }: { disabled: boolean }) {
             sx={{
               width: "90px",
               marginLeft: "0.5rem",
-              paddingTop: "0.75rem",
-              paddingBottom: "0.75rem",
+              paddingTop: "0.65rem",
+              paddingBottom: "0.65rem",
             }}
             size="small"
             disabled={!inputText}

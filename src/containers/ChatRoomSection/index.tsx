@@ -65,7 +65,7 @@ export function ChatRoomSection({
       >
         <Box
           sx={{
-            height: "calc(100% - 45px)",
+            height: "calc(100% - 42px)",
             width: "100%",
           }}
         >
@@ -117,7 +117,7 @@ export function ChatRoomSection({
             }}
             inputProps={{
               style: {
-                height: "26px",
+                height: "24px",
                 fontSize: "20px",
                 paddingTop: "0.25rem",
               },
@@ -136,8 +136,8 @@ export function ChatRoomSection({
             sx={{
               width: "88px",
               marginLeft: "0.5rem",
-              paddingTop: "0.75rem",
-              paddingBottom: "0.75rem",
+              paddingTop: "0.65rem",
+              paddingBottom: "0.65rem",
             }}
             size="small"
             disabled={!inputText}

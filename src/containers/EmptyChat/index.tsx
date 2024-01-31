@@ -21,6 +21,16 @@ export function EmptyChat({ disabled }: { disabled: boolean }) {
     navigate(`/app/chat/${id}${queryStr}`);
   };
 
+  const [isComposition, setIsComposition] = useState<boolean>(false);
+
+  const handleComposition = (evt) => {
+    if (evt.type === "compositionend") {
+      setIsComposition(false);
+    } else {
+      setIsComposition(true);
+    }
+  };
+
   return (
     <>
       <Grid
@@ -145,8 +155,10 @@ export function EmptyChat({ disabled }: { disabled: boolean }) {
                 paddingTop: "0.25rem",
               },
             }}
+            onCompositionStart={handleComposition}
+            onCompositionEnd={handleComposition}
             onKeyDown={(evt) => {
-              if (evt.key === "Enter" && !evt.shiftKey) {
+              if (evt.key === "Enter" && !evt.shiftKey && !isComposition) {
                 evt.preventDefault();
                 startConversation(inputText);
               }

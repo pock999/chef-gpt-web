@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["react", "react-dom", "react-router-dom", "@mui/material", "@types/react-transition-group"],
+    "types": ["react", "react-dom", "react-router-dom"],
     "allowJs": false,
     "skipLibCheck": false,
     "esModuleInterop": false,

@@ -21,10 +21,12 @@ ReactDOM.render(
       autoHideDuration={1000}
     >
       <SnackbarUtilsConfigurator />
-      <BrowserRouter>
-        <InjectAxiosInterceptors />
-        <App />
-      </BrowserRouter>
+      <div className="bg-background text-foreground flex h-screen flex-col items-center">
+        <BrowserRouter>
+          <InjectAxiosInterceptors />
+          <App />
+        </BrowserRouter>
+      </div>
     </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById("root")

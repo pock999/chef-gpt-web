@@ -4,6 +4,7 @@ import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { RoutesGuard, GuestGuard } from "./shared";
 import { CONFIG } from "./config";
+import { Login, Register } from "./pages";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -18,6 +19,8 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route> */}
+          <Route path="auth/login" element={<Login />}></Route>
+          <Route path="auth/register" element={<Register />}></Route>
         </Route>
 
         <Route element={<RoutesGuard />}>

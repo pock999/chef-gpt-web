@@ -4,7 +4,8 @@ import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { RoutesGuard, GuestGuard } from "./shared";
 import { CONFIG } from "./config";
-import { Login, Register } from "./pages";
+import { ChatRoom, Login, Register } from "./pages";
+import AppLayout from "./layouts/App";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -24,10 +25,12 @@ function App() {
         </Route>
 
         <Route element={<RoutesGuard />}>
-          {/* <Route path="app" element={<AppLayout />}>
-            <Route path="chat" element={<ChatList />} />
-            <Route path="chat/:id" element={<ChatRoom />} />
-          </Route> */}
+          <Route path="app" element={<AppLayout />}>
+            {/* <Route path="chat" element={<ChatList />} />
+            <Route path="chat/:id" element={<ChatRoom />} /> */}
+            <Route path="chat" element={<ChatRoom />}></Route>
+            <Route path="chat/:id" element={<ChatRoom />}></Route>
+          </Route>
         </Route>
 
         {/* <Route

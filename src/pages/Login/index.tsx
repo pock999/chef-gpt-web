@@ -58,8 +58,8 @@ export function Login() {
         evt.currentTarget.elements.namedItem("password") as HTMLInputElement
       ).value;
 
-      // await AuthService.login(data);
-      // navigate('/chat');
+      await AuthService.login(data);
+      navigate("/app/chat");
     } catch (e) {}
     setSubmitLoading(false);
   };

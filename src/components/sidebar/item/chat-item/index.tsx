@@ -1,8 +1,8 @@
 import React, { FC, useRef } from "react";
 import { useNavigate, useParams } from "react-router";
-import { cn } from "../../../libs/utils";
+import { cn } from "../../../../libs/utils";
 import { IconRobotFace } from "@tabler/icons-react";
-import { DeleteChat } from "./DeleteItem";
+import { DeleteChat } from "../delete-item";
 
 interface ChatItemProps {
   chat: any;

@@ -1,3 +1,3 @@
-export * from "./Login";
-export * from "./Register";
-export * from "./ChatRoom";
+export * from "./login";
+export * from "./register";
+export * from "./chat-room";

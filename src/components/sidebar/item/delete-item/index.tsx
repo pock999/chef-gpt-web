@@ -7,8 +7,8 @@ import {
 } from "@radix-ui/react-dialog";
 import { IconTrash } from "@tabler/icons-react";
 import React, { FC, useRef, useState } from "react";
-import { Button } from "../../ui";
-import { DialogHeader, DialogFooter } from "../../ui/Dialog";
+import { Button } from "../../../ui";
+import { DialogHeader, DialogFooter } from "../../../ui/dialog";
 
 interface DeleteChatProps {
   chat: any;

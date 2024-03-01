@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
-import { SidebarCreateButtons } from "./SidebarCreateButton";
+import { SidebarCreateButtons } from "../sidebar-create-button";
+import { SidebarDataList } from "../sidebar-data-list";
 
 interface SidebarContentProps {
   contentType: "chats";
@@ -36,11 +37,11 @@ export const SidebarContent: FC<SidebarContentProps> = ({
         /> */}
       </div>
 
-      {/* <SidebarDataList
+      <SidebarDataList
         contentType={contentType}
         data={filteredData}
         folders={folders}
-      /> */}
+      />
     </div>
   );
 };

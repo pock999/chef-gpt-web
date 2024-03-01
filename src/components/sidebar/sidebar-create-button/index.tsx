@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Button } from "../ui";
+import { Button } from "../../ui";
 import { IconPlus } from "@tabler/icons-react";
 
 interface SidebarCreateButtonsProps {

@@ -1,1 +1,1 @@
-export * from "./ChatInput";
+export * from "./chat-input";

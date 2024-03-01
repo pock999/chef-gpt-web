@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { TabsContent } from "../ui/Tabs";
-import { UI_CONFIG } from "../../config";
-import { SidebarContent } from "./SideContent";
+import { TabsContent } from "../../ui/tabs";
+import { UI_CONFIG } from "../../../config";
+import { SidebarContent } from "../sidebar-content";
 
 interface SidebarProps {
   showSidebar: boolean;

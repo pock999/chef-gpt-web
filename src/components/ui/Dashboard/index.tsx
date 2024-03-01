@@ -1,10 +1,10 @@
 import React, { FC, useState } from "react";
-import { Button } from "../Button";
+import { Button } from "../button";
 import { UI_CONFIG } from "../../../config";
 import { IconChevronCompactRight } from "@tabler/icons-react";
 import { cn } from "../../../libs/utils";
-import { Tabs } from "../Tabs";
-import { Sidebar } from "../../sidebar/Sidebar";
+import { Tabs } from "../tabs";
+import { Sidebar } from "../../sidebar";
 
 interface DashboardProps {
   children: React.ReactNode;

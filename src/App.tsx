@@ -5,7 +5,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { RoutesGuard, GuestGuard } from "./shared";
 import { CONFIG } from "./config";
 import { ChatRoom, Login, Register } from "./pages";
-import AppLayout from "./layouts/App";
+import AppLayout from "./layouts/app";
 
 function App() {
   // const [count, setCount] = useState(0)

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import { cn } from "../../libs/utils";
-import { ChatItem } from "./item/ChatItem";
+import { cn } from "../../../libs/utils";
+import { ChatItem } from "../item";
 
 interface SidebarDataListProps {
   contentType: "chats";

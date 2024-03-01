@@ -6,6 +6,8 @@ import { Dashboard } from "../../components/ui/Dashboard";
 export default function AppLayout() {
   const [loading, setLoading] = useState(false);
 
+  // TODO: get chat list
+
   if (loading) {
     return <Loading />;
   }

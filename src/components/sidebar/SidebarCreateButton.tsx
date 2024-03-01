@@ -11,6 +11,7 @@ export const SidebarCreateButtons: FC<SidebarCreateButtonsProps> = ({
   contentType,
   hasData,
 }) => {
+  // TODO: 抽出
   const handleNewChat = async () => {};
 
   return (

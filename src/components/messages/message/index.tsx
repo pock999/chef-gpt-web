@@ -12,7 +12,8 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 
-const ICON_SIZE = 32;
+import * as Avatar from "@radix-ui/react-avatar";
+import { UI_CONFIG } from "../../../config";
 
 interface MessageProps {
   message: any;
@@ -31,10 +32,25 @@ export const Message: FC<MessageProps> = ({ message, isLast }) => {
         <div className="space-y-3">
           {message.role === "ai" ? (
             <div className="flex items-center space-x-4">
-              <IconRobot
+              {/* <IconRobot
                 className="border-primary bg-primary text-secondary rounded border-[1px] p-1"
                 size={ICON_SIZE}
-              />
+              /> */}
+              <Avatar.Root className="AvatarRoot">
+                <Avatar.Image
+                  className="AvatarImage"
+                  src="/avatar.jpg"
+                  alt="Colm Tuite"
+                  style={{
+                    width: UI_CONFIG.ICON_SIZE,
+                    height: UI_CONFIG.ICON_SIZE,
+                    borderRadius: "50%",
+                  }}
+                />
+                <Avatar.Fallback className="AvatarFallback" delayMs={600}>
+                  AI
+                </Avatar.Fallback>
+              </Avatar.Root>
 
               <div className="text-lg font-semibold">AI</div>
             </div>
@@ -42,7 +58,7 @@ export const Message: FC<MessageProps> = ({ message, isLast }) => {
             <div className="flex items-center space-x-3">
               <IconMoodSmile
                 className="bg-primary text-secondary border-primary rounded border-[1px] p-1"
-                size={ICON_SIZE}
+                size={UI_CONFIG.ICON_SIZE}
               />
               <div className="text-lg font-semibold">User</div>
             </div>

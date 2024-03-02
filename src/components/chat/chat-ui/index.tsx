@@ -9,10 +9,9 @@ import { useConversationStore, useMessageStore } from "../../../store";
 import BeatLoader from "react-spinners/BeatLoader";
 import { cn } from "../../../libs/utils";
 import { IconRobot } from "@tabler/icons-react";
+import { UI_CONFIG } from "../../../config";
 
 interface ChatUIProps {}
-
-const ICON_SIZE = 32;
 
 export const ChatUI: FC<ChatUIProps> = ({}) => {
   const params = useParams();
@@ -125,7 +124,7 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
                   <div className="flex items-center space-x-4">
                     <IconRobot
                       className="border-primary bg-primary text-secondary rounded border-[1px] p-1"
-                      size={ICON_SIZE}
+                      size={UI_CONFIG.ICON_SIZE}
                     />
                     <div className="text-lg font-semibold">AI</div>
                   </div>

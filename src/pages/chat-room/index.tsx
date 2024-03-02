@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useConversationStore, useMessageStore } from "../../store";
 import { useParams } from "react-router-dom";
 import { Brand, ChatInput } from "../../components";
+import { ChatUI } from "../../components/chat/chat-ui";
 
 export function ChatRoom() {
   const { id } = useParams();
@@ -63,7 +64,7 @@ export function ChatRoom() {
             </div>
           </div>
         ) : (
-          <>ChatUI</>
+          <ChatUI />
         )}
       </div>
     </div>

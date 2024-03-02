@@ -11,6 +11,7 @@ import { Button } from "../../../ui";
 import { DialogHeader, DialogFooter } from "../../../ui/dialog";
 import { useConversationStore, useMessageStore } from "../../../../store";
 import { useNavigate, useParams } from "react-router";
+import { Snackbar } from "../../../../shared";
 
 interface DeleteChatProps {
   chat: any;
@@ -38,6 +39,7 @@ export const DeleteChat: FC<DeleteChatProps> = ({ chat }) => {
       clearMsgList();
       navigate(`/app/chat`);
     }
+    Snackbar.success("刪除成功");
     setShowChatDialog(false);
   };
 

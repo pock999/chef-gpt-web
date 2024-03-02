@@ -8,35 +8,47 @@
 
 // export default config
 
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
-import { viteStaticCopy } from 'vite-plugin-static-copy';
-import path from 'path';
+import { viteStaticCopy } from "vite-plugin-static-copy";
+import path from "path";
 
 const __dirname = path.resolve();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    esbuild: {
-        loader: 'tsx',
+  esbuild: {
+    loader: "tsx",
+  },
+  root: "./",
+  build: {
+    outDir: "./dist",
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        ".js": "jsx",
+        ".ts": "tsx",
+      },
     },
-    root: './',
-    build: {
-        outDir: './dist',
-    },
-    optimizeDeps: {
-        esbuildOptions: {
-            loader: {
-                '.js': 'jsx',
-                '.ts': 'tsx',
-            },
+    include: ["@emotion/styled", "@emotion/react", "@mui/material"],
+  },
+  plugins: [
+    react(),
+    tsconfigPaths(),
+    svgr(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "avatar.jpg",
+          dest: "./",
         },
-        include: ['@emotion/styled', '@emotion/react', '@mui/material'],
-    },
-    plugins: [react(), tsconfigPaths(), svgr()],
-    server: {
-        host: true
-    }
+      ],
+    }),
+  ],
+  server: {
+    host: true,
+  },
 });

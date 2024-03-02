@@ -4,6 +4,7 @@ import Loading from "../../../layouts/loading";
 import { ChatInput } from "../chat-input";
 import { useScroll } from "../../../hooks";
 import { ChatScrollButtons } from "../chat-scroll-buttons";
+import { ChatMessages } from "../chat-messages";
 
 interface ChatUIProps {}
 
@@ -82,7 +83,7 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
         onScroll={handleScroll}
       >
         <div ref={messagesStartRef} />
-        {/* <ChatMessages /> */}
+        <ChatMessages />
         <div ref={messagesEndRef} />
       </div>
 

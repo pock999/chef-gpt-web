@@ -55,7 +55,7 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
               // router.replace(`${pathname}?tab=${tabValue}`)
             }}
           >
-            <Sidebar contentType={"chats"} showSidebar={showSidebar} />
+            <Sidebar showSidebar={showSidebar} />
           </Tabs>
         )}
       </div>

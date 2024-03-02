@@ -5,11 +5,46 @@ import { ChatInput } from "../chat-input";
 import { useScroll } from "../../../hooks";
 import { ChatScrollButtons } from "../chat-scroll-buttons";
 import { ChatMessages } from "../chat-messages";
+import { useConversationStore, useMessageStore } from "../../../store";
 
 interface ChatUIProps {}
 
 export const ChatUI: FC<ChatUIProps> = ({}) => {
   const params = useParams();
+
+  const { id } = useParams();
+
+  const {
+    conversationList,
+    listLoading,
+    pagination,
+    fetchConversationList,
+    getTitle,
+    currentConversation,
+  } = useConversationStore((state) => ({
+    conversationList: state.conversationList,
+    listLoading: state.listLoading,
+    pagination: state.pagination,
+    fetchConversationList: state.fetchConversationList,
+    getTitle: state.getTitle,
+    currentConversation: state.conversationList.find(
+      (item) => `${item.id}` === `${id}`
+    ),
+  }));
+
+  const {
+    msgList,
+    msgListLoading,
+    msgPagination,
+    postMessage,
+    fetchMessageList,
+  } = useMessageStore((state) => ({
+    msgList: state.msgList,
+    msgListLoading: state.listLoading,
+    msgPagination: state.pagination,
+    postMessage: state.postMessage,
+    fetchMessageList: state.fetchMessageList,
+  }));
 
   const [loading, setLoading] = useState(true);
   // const { handleNewChat, handleFocusChatInput } = useChatHandler()
@@ -28,10 +63,13 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // get chat
-      // get message
-      // scrollToBottom()
-      // setIsAtBottom(true)
+      await fetchConversationList(true);
+
+      if (typeof id !== "undefined") {
+        await fetchMessageList(id, true);
+      }
+      scrollToBottom();
+      setIsAtBottom(true);
     };
 
     if (params.id) {
@@ -44,12 +82,12 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
     }
   }, []);
 
-  const fetchMessages = async () => {
-    // TODO:
-  };
-  const fetchChat = async () => {
-    // TODO:
-  };
+  // const fetchMessages = async () => {
+  //   // TODO:
+  // };
+  // const fetchChat = async () => {
+  //   // TODO:
+  // };
 
   if (loading) {
     return <Loading />;
@@ -74,7 +112,7 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
       <div className="bg-secondary flex max-h-[50px] min-h-[50px] w-full items-center justify-center border-b-2 px-20 font-bold">
         <div className="max-w-[300px] truncate sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] xl:max-w-[700px]">
           {/* {selectedChat?.name || "Chat"} */}
-          選擇的 Chat
+          {currentConversation?.title || "Chat"}
         </div>
       </div>
 

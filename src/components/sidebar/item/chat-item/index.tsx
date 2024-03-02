@@ -2,7 +2,7 @@ import React, { FC, useRef } from "react";
 import { useNavigate, useParams } from "react-router";
 import { cn } from "../../../../libs/utils";
 import { IconRobotFace } from "@tabler/icons-react";
-import { DeleteChat } from "../delete-item";
+import { DeleteChat } from "../delete-chat";
 
 interface ChatItemProps {
   chat: any;
@@ -48,7 +48,7 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
       />
 
       <div className="ml-3 flex-1 truncate text-sm font-semibold">
-        {chat.name}
+        {chat.title}
       </div>
 
       <div

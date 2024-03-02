@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from "@radix-ui/react-dialog";
+} from "../../../ui/dialog";
 import { IconTrash } from "@tabler/icons-react";
 import React, { FC, useRef, useState } from "react";
 import { Button } from "../../../ui";
@@ -40,16 +40,14 @@ export const DeleteChat: FC<DeleteChatProps> = ({ chat }) => {
 
       <DialogContent onKeyDown={handleKeyDown}>
         <DialogHeader>
-          <DialogTitle>Delete {chat.name}</DialogTitle>
+          <DialogTitle>是否刪除 {chat.title}</DialogTitle>
 
-          <DialogDescription>
-            Are you sure you want to delete this chat?
-          </DialogDescription>
+          <DialogDescription>嘿 兄 dayˊ 不再考慮下嗎？</DialogDescription>
         </DialogHeader>
 
         <DialogFooter>
           <Button variant="ghost" onClick={() => setShowChatDialog(false)}>
-            Cancel
+            行
           </Button>
 
           <Button
@@ -57,7 +55,7 @@ export const DeleteChat: FC<DeleteChatProps> = ({ chat }) => {
             variant="destructive"
             onClick={handleDeleteChat}
           >
-            Delete
+            刪吧
           </Button>
         </DialogFooter>
       </DialogContent>

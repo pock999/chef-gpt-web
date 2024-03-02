@@ -3,30 +3,21 @@ import { SidebarCreateButtons } from "../sidebar-create-button";
 import { SidebarDataList } from "../sidebar-data-list";
 
 interface SidebarContentProps {
-  contentType: "chats";
   data: any[];
-  folders: any[];
 }
 
-export const SidebarContent: FC<SidebarContentProps> = ({
-  contentType,
-  data,
-  folders,
-}) => {
+export const SidebarContent: FC<SidebarContentProps> = ({ data }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredData: any = data.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredData: any = data.filter((item) =>
+  //   item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   return (
     // Subtract 50px for the height of the workspace settings
     <div className="flex max-h-[calc(100%-50px)] grow flex-col">
       <div className="mt-2 flex items-center">
-        <SidebarCreateButtons
-          contentType={contentType}
-          hasData={data.length > 0}
-        />
+        <SidebarCreateButtons hasData={data.length > 0} />
       </div>
 
       <div className="mt-2">
@@ -37,11 +28,7 @@ export const SidebarContent: FC<SidebarContentProps> = ({
         /> */}
       </div>
 
-      <SidebarDataList
-        contentType={contentType}
-        data={filteredData}
-        folders={folders}
-      />
+      <SidebarDataList data={data} />
     </div>
   );
 };

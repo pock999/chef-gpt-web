@@ -2,16 +2,26 @@ import React, { FC } from "react";
 import { TabsContent } from "../../ui/tabs";
 import { UI_CONFIG } from "../../../config";
 import { SidebarContent } from "../sidebar-content";
+import { useConversationStore } from "../../../store";
 
 interface SidebarProps {
   showSidebar: boolean;
-  contentType: "chats";
 }
 
-export const Sidebar: FC<SidebarProps> = ({ showSidebar, contentType }) => {
-  const data: any[] = [];
-  const folders: any[] = [];
-
+export const Sidebar: FC<SidebarProps> = ({ showSidebar }) => {
+  const {
+    conversationList,
+    listLoading,
+    pagination,
+    // fetchConversationList,
+    createConversation,
+  } = useConversationStore((state) => ({
+    conversationList: state.conversationList,
+    listLoading: state.listLoading,
+    pagination: state.pagination,
+    fetchConversationList: state.fetchConversationList,
+    createConversation: state.createConversation,
+  }));
   return (
     <TabsContent
       className="m-0 w-full space-y-2"
@@ -27,14 +37,10 @@ export const Sidebar: FC<SidebarProps> = ({ showSidebar, contentType }) => {
           ? `calc(${UI_CONFIG.SIDEBAR_WIDTH}px - 60px)`
           : "0px",
       }}
-      value={contentType}
+      value="chats"
     >
       <div className="flex h-full flex-col p-3">
-        <SidebarContent
-          contentType={contentType}
-          data={data}
-          folders={folders}
-        />
+        <SidebarContent data={conversationList} />
       </div>
     </TabsContent>
   );

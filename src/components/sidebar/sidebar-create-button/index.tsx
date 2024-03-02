@@ -3,12 +3,10 @@ import { Button } from "../../ui";
 import { IconPlus } from "@tabler/icons-react";
 
 interface SidebarCreateButtonsProps {
-  contentType: "chats";
   hasData: boolean;
 }
 
 export const SidebarCreateButtons: FC<SidebarCreateButtonsProps> = ({
-  contentType,
   hasData,
 }) => {
   // TODO: 抽出

@@ -3,16 +3,10 @@ import { cn } from "../../../libs/utils";
 import { ChatItem } from "../item";
 
 interface SidebarDataListProps {
-  contentType: "chats";
   data: any[];
-  folders: any[];
 }
 
-export const SidebarDataList: FC<SidebarDataListProps> = ({
-  contentType,
-  data,
-  folders,
-}) => {
+export const SidebarDataList: FC<SidebarDataListProps> = ({ data }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
 

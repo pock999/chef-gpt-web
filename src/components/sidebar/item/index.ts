@@ -1,2 +1,2 @@
 export * from "./chat-item";
-export * from "./delete-item";
+export * from "./delete-chat";

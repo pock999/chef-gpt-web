@@ -8,6 +8,8 @@ import {
   IconFileText,
   IconMoodSmile,
   IconPencil,
+  IconRobot,
+  IconUser,
 } from "@tabler/icons-react";
 
 const ICON_SIZE = 32;
@@ -27,14 +29,14 @@ export const Message: FC<MessageProps> = ({ message, isLast }) => {
     >
       <div className="relative flex w-[300px] flex-col py-6 sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px]">
         <div className="space-y-3">
-          {message.role === "system" ? (
+          {message.role === "ai" ? (
             <div className="flex items-center space-x-4">
-              <IconPencil
+              <IconRobot
                 className="border-primary bg-primary text-secondary rounded border-[1px] p-1"
                 size={ICON_SIZE}
               />
 
-              <div className="text-lg font-semibold">Prompt</div>
+              <div className="text-lg font-semibold">AI</div>
             </div>
           ) : (
             <div className="flex items-center space-x-3">
@@ -42,10 +44,13 @@ export const Message: FC<MessageProps> = ({ message, isLast }) => {
                 className="bg-primary text-secondary border-primary rounded border-[1px] p-1"
                 size={ICON_SIZE}
               />
+              <div className="text-lg font-semibold">User</div>
             </div>
           )}
 
-          <div className="font-semibold">usename</div>
+          <div className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 min-w-full space-y-6 break-words">
+            {message.content}
+          </div>
         </div>
       </div>
     </div>

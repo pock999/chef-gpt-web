@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useMessageStore } from "../store";
 
 export const useScroll = () => {
   const messagesStartRef = useRef<HTMLDivElement>(null);
@@ -17,27 +18,27 @@ export const useScroll = () => {
   const [userScrolled, setUserScrolled] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
 
-  useEffect(
-    () => {
-      setUserScrolled(false);
-
-      // if (!isGenerating && userScrolled)
-      setUserScrolled(false);
-    },
-    [
-      // TODO: isGenerating
-    ]
+  const { isGenerating, setIsGenerating, msgList } = useMessageStore(
+    (state) => ({
+      msgList: state.msgList,
+      isGenerating: state.isGenerating,
+      setIsGenerating: state.setIsGenerating,
+    })
   );
 
-  useEffect(
-    () => {
-      // if (!isGenerating && !userScrolled)
+  useEffect(() => {
+    setUserScrolled(false);
+
+    if (!isGenerating && userScrolled) {
+      setUserScrolled(false);
+    }
+  }, [isGenerating]);
+
+  useEffect(() => {
+    if (!isGenerating && !userScrolled) {
       scrollToBottom();
-    },
-    [
-      // TODO: chatMessages
-    ]
-  );
+    }
+  }, [msgList.length]);
 
   const scrollToTop = useCallback(() => {
     if (messagesStartRef.current) {

@@ -6,8 +6,13 @@ import { useScroll } from "../../../hooks";
 import { ChatScrollButtons } from "../chat-scroll-buttons";
 import { ChatMessages } from "../chat-messages";
 import { useConversationStore, useMessageStore } from "../../../store";
+import BeatLoader from "react-spinners/BeatLoader";
+import { cn } from "../../../libs/utils";
+import { IconRobot } from "@tabler/icons-react";
 
 interface ChatUIProps {}
+
+const ICON_SIZE = 32;
 
 export const ChatUI: FC<ChatUIProps> = ({}) => {
   const params = useParams();
@@ -38,12 +43,14 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
     msgPagination,
     postMessage,
     fetchMessageList,
+    isGenerating,
   } = useMessageStore((state) => ({
     msgList: state.msgList,
     msgListLoading: state.listLoading,
     msgPagination: state.pagination,
     postMessage: state.postMessage,
     fetchMessageList: state.fetchMessageList,
+    isGenerating: state.isGenerating,
   }));
 
   const [loading, setLoading] = useState(true);
@@ -63,11 +70,6 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchConversationList(true);
-
-      if (typeof id !== "undefined") {
-        await fetchMessageList(id, true);
-      }
       scrollToBottom();
       setIsAtBottom(true);
     };
@@ -81,13 +83,6 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
       setLoading(false);
     }
   }, []);
-
-  // const fetchMessages = async () => {
-  //   // TODO:
-  // };
-  // const fetchChat = async () => {
-  //   // TODO:
-  // };
 
   if (loading) {
     return <Loading />;
@@ -122,11 +117,31 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
       >
         <div ref={messagesStartRef} />
         <ChatMessages />
+        {isGenerating && (
+          <>
+            <div className="flex w-full justify-center bg-secondary">
+              <div className="relative flex w-[300px] flex-col py-6 sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px]">
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-4">
+                    <IconRobot
+                      className="border-primary bg-primary text-secondary rounded border-[1px] p-1"
+                      size={ICON_SIZE}
+                    />
+                    <div className="text-lg font-semibold">AI</div>
+                  </div>
+                  <div className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 min-w-full space-y-6 break-words">
+                    <BeatLoader color="#575757" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
         <div ref={messagesEndRef} />
       </div>
 
       <div className="relative w-[300px] items-end pb-8 pt-5 sm:w-[400px] md:w-[500px] lg:w-[660px] xl:w-[800px]">
-        <ChatInput />
+        <ChatInput scrollToBottom={() => scrollToBottom()} />
       </div>
     </div>
   );

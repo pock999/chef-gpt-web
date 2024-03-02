@@ -1,23 +1,100 @@
-import React, { useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { TextareaAutosize } from "../../ui";
 import { IconSend } from "@tabler/icons-react";
 import { cn } from "../../../libs/utils";
+import { useNavigate, useParams } from "react-router";
+import { useConversationStore, useMessageStore } from "../../../store";
 
-export function ChatInput() {
+interface ChatInputProps {
+  scrollToBottom: () => void;
+}
+
+export const ChatInput: FC<ChatInputProps> = ({ scrollToBottom }) => {
   const [isTyping, setIsTyping] = useState<boolean>(false);
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const {
+    conversationList,
+    listLoading,
+    pagination,
+    fetchConversationList,
+    getTitle,
+    currentConversation,
+    createConversation,
+  } = useConversationStore((state) => ({
+    conversationList: state.conversationList,
+    listLoading: state.listLoading,
+    pagination: state.pagination,
+    fetchConversationList: state.fetchConversationList,
+    getTitle: state.getTitle,
+    createConversation: state.createConversation,
+    currentConversation: state.conversationList.find(
+      (item) => `${item.id}` === `${id}`
+    ),
+  }));
+
+  const {
+    msgList,
+    msgListLoading,
+    msgPagination,
+    postTempMessage,
+    postMessage,
+    fetchMessageList,
+    isGenerating,
+    setIsGenerating,
+  } = useMessageStore((state) => ({
+    msgList: state.msgList,
+    msgListLoading: state.listLoading,
+    msgPagination: state.pagination,
+    postTempMessage: state.postTempMessage,
+    postMessage: state.postMessage,
+    fetchMessageList: state.fetchMessageList,
+    isGenerating: state.isGenerating,
+    setIsGenerating: state.setIsGenerating,
+  }));
 
   const chatInputRef = useRef(null);
   const [userInput, setUserInput] = useState<string>("");
-  const [aiLoading, setAiLoading] = useState<boolean>(false);
   const handleInputChange = (value: string) => {
     setUserInput(value);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
+  const sendMessage = async (question: string) => {
+    const temp = userInput;
+    try {
+      setUserInput("");
+      setIsGenerating(true);
+
+      if (typeof currentConversation !== "undefined") {
+        postTempMessage(question);
+        scrollToBottom();
+        await postMessage(currentConversation.id, question);
+
+        if (currentConversation?.title === null) {
+          await getTitle(currentConversation.id);
+        }
+
+        scrollToBottom();
+      } else {
+        const id = await createConversation();
+        await postMessage(id, question);
+        await getTitle(id);
+        navigate(`/app/chat/${id}`);
+      }
+    } catch (err) {
+      console.log("err => ", err);
+      setUserInput(temp);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleKeyDown = async (event: React.KeyboardEvent) => {
     if (!isTyping && event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      // TODO: send
-      // handleSendMessage(userInput, chatMessages, false)
+      sendMessage(userInput);
     }
   };
 
@@ -47,10 +124,9 @@ export function ChatInput() {
                 !userInput && "cursor-not-allowed opacity-50"
               )}
               onClick={() => {
-                if (aiLoading) {
-                  console.log("fsdfds");
+                if (!isGenerating) {
                   if (!userInput) return;
-                  // handleSendMessage(userInput, chatMessages, false)
+                  sendMessage(userInput);
                 }
               }}
               size={30}
@@ -60,4 +136,4 @@ export function ChatInput() {
       </div>
     </>
   );
-}
+};

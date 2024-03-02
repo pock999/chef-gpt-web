@@ -60,7 +60,7 @@ export function ChatRoom() {
             </div>
 
             <div className="w-[300px] pb-8 sm:w-[400px] md:w-[500px] lg:w-[660px] xl:w-[800px]">
-              <ChatInput />
+              <ChatInput scrollToBottom={() => {}} />
             </div>
           </div>
         ) : (

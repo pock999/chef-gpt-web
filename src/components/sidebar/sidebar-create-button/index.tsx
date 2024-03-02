@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Button } from "../../ui";
 import { IconPlus } from "@tabler/icons-react";
+import { useNavigate } from "react-router";
+import { useConversationStore } from "../../../store";
 
 interface SidebarCreateButtonsProps {
   hasData: boolean;
@@ -9,8 +11,17 @@ interface SidebarCreateButtonsProps {
 export const SidebarCreateButtons: FC<SidebarCreateButtonsProps> = ({
   hasData,
 }) => {
-  // TODO: 抽出
-  const handleNewChat = async () => {};
+  const navigate = useNavigate();
+
+  const { getTitle, createConversation } = useConversationStore((state) => ({
+    getTitle: state.getTitle,
+    createConversation: state.createConversation,
+  }));
+
+  const handleNewChat = async () => {
+    const id = await createConversation();
+    navigate(`/app/chat/${id}`);
+  };
 
   return (
     <div className="flex w-full space-x-2 ">

@@ -9,6 +9,8 @@ import { IconTrash } from "@tabler/icons-react";
 import React, { FC, useRef, useState } from "react";
 import { Button } from "../../../ui";
 import { DialogHeader, DialogFooter } from "../../../ui/dialog";
+import { useConversationStore, useMessageStore } from "../../../../store";
+import { useNavigate, useParams } from "react-router";
 
 interface DeleteChatProps {
   chat: any;
@@ -18,12 +20,25 @@ export const DeleteChat: FC<DeleteChatProps> = ({ chat }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [showChatDialog, setShowChatDialog] = useState(false);
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const { deleteConversation } = useConversationStore((state) => ({
+    deleteConversation: state.deleteConversation,
+  }));
+
+  const { clearMsgList } = useMessageStore((state) => ({
+    clearMsgList: state.clearMsgList,
+  }));
+
   const handleDeleteChat = async () => {
-    // TODO:
-    // await deleteChat(chat.id)
-    // setChats(prevState => prevState.filter(c => c.id !== chat.id))
-    // setShowChatDialog(false)
-    // handleNewChat()
+    await deleteConversation(chat.id);
+
+    if (`${id}` === `${chat.id}`) {
+      clearMsgList();
+      navigate(`/app/chat`);
+    }
+    setShowChatDialog(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {

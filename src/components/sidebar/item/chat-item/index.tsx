@@ -12,16 +12,12 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
   const navigate = useNavigate();
   const params = useParams();
 
-  // TODO: store / params
-  // const isActive = params.chatid === chat.id || selectedChat?.id === chat.id;
-
-  const isActive = params.chatid === chat.id;
+  const isActive = `${params.id}` === `${chat.id}`;
 
   const itemRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
-    // TODO: goto
-    // navigate();
+    navigate(`/app/chat/${chat.id}`);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -35,8 +31,8 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
     <div
       ref={itemRef}
       className={cn(
-        "hover:bg-accent focus:bg-accent group flex w-full cursor-pointer items-center rounded p-2 hover:opacity-50 focus:outline-none",
-        isActive && "bg-accent"
+        "hover:bg-neutral-300 focus:bg-neutral-300 group flex w-full cursor-pointer items-center rounded p-2 hover:opacity-50 focus:outline-none",
+        isActive && "bg-neutral-300"
       )}
       tabIndex={0}
       onKeyDown={handleKeyDown}

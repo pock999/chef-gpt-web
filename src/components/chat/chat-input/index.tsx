@@ -107,7 +107,7 @@ export const ChatInput: FC<ChatInputProps> = ({ scrollToBottom }) => {
           </div> */}
           <TextareaAutosize
             textareaRef={chatInputRef}
-            className="ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring text-md flex w-full resize-none rounded-md border-none bg-transparent px-14 py-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+            className="ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring text-base flex w-full resize-none rounded-md border-none bg-transparent px-5 py-1 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             placeholder={`請輸入`}
             onValueChange={handleInputChange}
             value={userInput}

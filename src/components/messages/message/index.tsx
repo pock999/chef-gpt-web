@@ -64,7 +64,7 @@ export const Message: FC<MessageProps> = ({ message, isLast }) => {
             </div>
           )}
 
-          <div className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 min-w-full space-y-6 break-words">
+          <div className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 min-w-full space-y-6 break-words text-2xl">
             {message.content}
           </div>
         </div>

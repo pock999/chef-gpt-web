@@ -65,9 +65,9 @@ export const ChatInput: FC<ChatInputProps> = ({ scrollToBottom }) => {
     const temp = userInput;
     try {
       setUserInput("");
-      setIsGenerating(true);
 
       if (typeof currentConversation !== "undefined") {
+        setIsGenerating(true);
         postTempMessage(question);
         scrollToBottom();
         await postMessage(currentConversation.id, question);
@@ -79,9 +79,10 @@ export const ChatInput: FC<ChatInputProps> = ({ scrollToBottom }) => {
         scrollToBottom();
       } else {
         const id = await createConversation();
+        navigate(`/app/chat/${id}`);
+        setIsGenerating(true);
         await postMessage(id, question);
         await getTitle(id);
-        navigate(`/app/chat/${id}`);
       }
     } catch (err) {
       console.log("err => ", err);
